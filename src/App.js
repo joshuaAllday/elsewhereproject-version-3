@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router-dom';
+
+import LandingPage from './pages/landing-page/landing-page.component';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends React.Component {
+  constructor(){
+    super();
+
+    this.state = {
+      articles: []
+    }
+  }
+
+  componentDidMount(){
+    fetch('https://dry-fjord-50481.herokuapp.com/articles')
+		.then(response => response.json())
+		.then(data => 
+			this.setState({
+				articles: data
+			})
+    )
+  }
+
+  render(){
+    return(
+      <div className="App">
+        <Switch>
+          <Route exact path='/' component={LandingPage} />
+        </Switch>
+      </div>
+    );
+  }
+};
 
 export default App;
