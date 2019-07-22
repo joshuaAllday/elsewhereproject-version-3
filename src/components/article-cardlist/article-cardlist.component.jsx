@@ -10,7 +10,7 @@ const ArticleCardList = ({collections}) => {
         <div>
             {
                 collections.map(({id, ...otherCollectionProps}) => (
-                    <ArticleCard key={id}{...otherCollectionProps} />
+                    <ArticleCard id={id} key={id}{...otherCollectionProps} />
                 ))
             }
         </div>

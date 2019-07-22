@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom';
 
 import './article-card.styles.css';
 
-const ArticleCard = ({articletitle, tag, firstname, lastname, history}) => (
-    <div className='card-container' onClick = {() => history.push('/about')} >
+const ArticleCard = ({id, articletitle, tag, firstname, lastname, history}) => (
+    <div className='card-container' onClick = {() => history.push(`/article/${id - 1}`)} >
             <div className='data-container'>
                 <h5 className='article-title'>
                     {articletitle}
