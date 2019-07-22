@@ -8,9 +8,9 @@ import aboutpicturetwo from '../../assets/About2.png';
 
 const AboutPage = () => (
     <div className='about-page-container'>
-        <h1> About Page </h1>
         <PageCard>
-            <p>
+            <h1> About Page </h1>
+            <p className="text-container">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor sodales velit, 
                 sit amet consectetur lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                 Sed at nibh blandit, auctor est nec, volutpat nisl. Suspendisse lobortis, ante id 
@@ -26,7 +26,7 @@ const AboutPage = () => (
             <div className='image-container'>
                 <img src={aboutpictureone} className='about-page-images' alt='about-page-images' />
             </div>
-            <p>
+            <p className="text-container">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor sodales velit, 
                 sit amet consectetur lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                 Sed at nibh blandit, auctor est nec, volutpat nisl. Suspendisse lobortis, ante id 
@@ -42,7 +42,7 @@ const AboutPage = () => (
             <div className='image-container'>
                 <img src={aboutpicturetwo} className='about-page-images' alt='about-page-images' />
             </div>
-            <p>
+            <p className="text-container"> 
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor sodales velit, 
                 sit amet consectetur lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                 Sed at nibh blandit, auctor est nec, volutpat nisl. Suspendisse lobortis, ante id 

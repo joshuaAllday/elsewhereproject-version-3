@@ -1,9 +1,12 @@
 .page-container{
     background-color: white;
-    border-radius: 15px; 
-    max-width: 1100px;
-    margin: 20px auto;
+    border-radius: 5px; 
+    max-width: 760px;
+    margin: 100px auto;
     padding: 25px 20px;
-    text-align: left;
+    text-align: center;
     justify-content: center;
+    border: 2px solid grey; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
