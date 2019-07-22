@@ -1,38 +1,37 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
+import { fetchCollectionsStartAsync } from './redux/articles/articles.actions';
+
+import Header from './components/header/header.component';
 import LandingPage from './pages/landing-page/landing-page.component';
+import AboutPage from './pages/about-page/about-page.component';
 
 import './App.css';
 
 class App extends React.Component {
-  constructor(){
-    super();
-
-    this.state = {
-      articles: []
-    }
-  }
 
   componentDidMount(){
-    fetch('https://dry-fjord-50481.herokuapp.com/articles')
-		.then(response => response.json())
-		.then(data => 
-			this.setState({
-				articles: data
-			})
-    )
+    const { fetchCollectionsStartAsync } = this.props;
+		fetchCollectionsStartAsync();
   }
 
   render(){
     return(
       <div className="App">
+        <Header />
         <Switch>
           <Route exact path='/' component={LandingPage} />
+          <Route exact path='/about' component={AboutPage} />
         </Switch>
       </div>
     );
   }
 };
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+	fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
+});
+
+export default connect(null, mapDispatchToProps)(App);

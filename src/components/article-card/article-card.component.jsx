@@ -2,13 +2,16 @@ import React from 'react';
 
 import './article-card.styles.css';
 
-const ArticleCard = () => (
+const ArticleCard = ({articletitle, tag, firstname, lastname}) => (
     <div className='card-container'>
         <h5 className='article-title'>
-            Title
+            {articletitle}
         </h5>
+        <p>
+        - {tag}
+        </p>
         <p className='article-author'>
-            Author
+            {firstname} {lastname}
         </p>
     </div>
 );

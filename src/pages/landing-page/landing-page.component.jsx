@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Header from '../../components/header/header.component';
 import WelcomeLogo from '../../components/welcome-logo/welcome-logo.component';
-import ArticleCardList from '../../components/article-cardlist/article-cardlist.component';
+import ArticleCardListContainer from '../../components/article-cardlist/article-cardlist.container';
 
 import './landing-page.styles.css';
 
 const LandingPage = () => (
-    <div>
-        <Header />
+    <div className='landing-page-container'>
         <h1>
             Landing Page 
         </h1>
@@ -19,7 +17,7 @@ const LandingPage = () => (
             <h3>
                 Article Card List 
             </h3>
-            <ArticleCardList />
+            <ArticleCardListContainer />
         </div> 
     </div>
 );
