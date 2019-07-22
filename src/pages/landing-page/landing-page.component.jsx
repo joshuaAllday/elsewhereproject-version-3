@@ -2,6 +2,7 @@ import React from 'react';
 
 import WelcomeLogo from '../../components/welcome-logo/welcome-logo.component';
 import ArticleCardListContainer from '../../components/article-cardlist/article-cardlist.container';
+import ScrollableContainer from '../../components/scrollable-container/scrollable-container.component';
 
 import './landing-page.styles.css';
 
@@ -17,7 +18,9 @@ const LandingPage = () => (
             <h3>
                 Article Card List 
             </h3>
-            <ArticleCardListContainer />
+            <ScrollableContainer>
+                <ArticleCardListContainer />
+            </ScrollableContainer>
         </div> 
     </div>
 );
