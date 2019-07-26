@@ -18,10 +18,10 @@ const ArticlePage = ({match, collections, isLoading}) => {
                   </div>
                 : <div>
                     <PageCard>
-                        <h1>{collections[id].articletitle}</h1>
-                        <p>- {collections[id].tag}</p>
+                        <h1>{collections[id].name}</h1>
+                        {/*<p>- {collections[id].tag}</p>
                         <p>{collections[id].firstname} {collections[id].lastname}</p>
-                        <p className='main-article-container'>{collections[id].article}</p>
+                        <p className='main-article-container'>{collections[id].article}</p>*/}
                     </PageCard>
                   </div>
             }

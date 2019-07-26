@@ -23,8 +23,8 @@ const AboutPage = () => (
                 pellentesque libero in facilisis. Proin urna ex, commodo ac urna ac, accumsan maximus 
                 lorem. In enim lorem, suscipit a lectus sed, tincidunt faucibus tortor.
             </p>
-            <div className='image-container'>
-                <img src={aboutpictureone} className='about-page-images' alt='about-page-images' />
+            <div className='about-images-container'>
+                <img src={aboutpictureone} className='about-page-images' alt="about-page-images"/>
             </div>
             <p className="text-container">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor sodales velit, 
@@ -39,7 +39,7 @@ const AboutPage = () => (
                 pellentesque libero in facilisis. Proin urna ex, commodo ac urna ac, accumsan maximus 
                 lorem. In enim lorem, suscipit a lectus sed, tincidunt faucibus tortor.
             </p>
-            <div className='image-container'>
+            <div className='about-images-container'>
                 <img src={aboutpicturetwo} className='about-page-images' alt='about-page-images' />
             </div>
             <p className="text-container"> 

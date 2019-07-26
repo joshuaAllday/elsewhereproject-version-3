@@ -17,14 +17,36 @@ export const SpinnerContainer = styled.div`
   border-top-color: #636767;
   animation: spin 1s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
+   -o-animation: spin 1s ease-in-out infinite;
+  -moz-animation: spin 1s ease-in-out infinite;
+  -ms-transition: spin 1s ease-in-out infinite;
+
   @keyframes spin {
     to {
       -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
     }
   }
   @-webkit-keyframes spin {
     to {
       -webkit-transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes spin {
+    to {
+      -o-transform: rotate(360deg);
+    }
+  }
+  @-moz-keyframes spin {
+    to {
+      -moz-transform: rotate(360deg);
+    }
+  }
+  @-ms-keyframes spin {
+    to {
+      -ms-transform: rotate(360deg);
     }
   }
 `;

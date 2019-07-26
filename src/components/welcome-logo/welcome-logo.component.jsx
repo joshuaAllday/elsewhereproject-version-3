@@ -1,10 +1,13 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
+import CustomButton from '../../components/custom-button/custom-button.component';
 
 import './welcome-logo.styles.css';
 
 import Logo from '../../assets/logo.png';
 
-const WelcomeLogo = () => {
+const WelcomeLogo = ({history}) => {
     return(
         <div className='welcome-container'>
             <div className='logo-container'>
@@ -14,12 +17,13 @@ const WelcomeLogo = () => {
                 <p className='message'>
                     This is a Social Journalism Website
                 </p>
-                <button className='learn-more'>
-                    Learn More 
-                </button>
+                <CustomButton onClick={()=> history.push('/about')}>
+                    Learn More
+                </CustomButton>
             </div>
         </div>
     );
 };
 
-export default WelcomeLogo;
+export default withRouter(WelcomeLogo);
+

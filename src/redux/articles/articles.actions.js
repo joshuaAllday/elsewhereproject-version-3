@@ -17,7 +17,7 @@ export const fetchCollectionsFailure = errorMessage => ({
 export const fetchCollectionsStartAsync = () => {
     return dispatch => {
         dispatch(fetchCollectionsStart());
-        return fetch('https://dry-fjord-50481.herokuapp.com/articles')
+        return fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
         .then(data => {
             dispatch(fetchCollectionsSuccess(data));

@@ -2,15 +2,10 @@
     padding: 0px 15px;
 }
 
-.image-container{
-    max-width: 1000px;
-    overflow: hidden;
-    border: 1px solid grey;
-}
-
 .about-page-images{
-    width: 100%;
+    width: 99%;
     object-fit: contain;
+    border: 1px solid grey;
 }
 
 .text-container{

@@ -8,6 +8,8 @@ import Header from './components/header/header.component';
 import LandingPage from './pages/landing-page/landing-page.component';
 import AboutPage from './pages/about-page/about-page.component';
 import ArticlePage from './pages/article-page/article-page.component';
+import PostPage from './pages/post-page/post-page.component';
+import MapPage from './pages/map-page/map-page.component';
 
 import './App.css';
 
@@ -26,6 +28,8 @@ class App extends React.Component {
           <Route exact path='/' component={LandingPage} />
           <Route exact path='/about' component={AboutPage} />
           <Route exact path='/article/:id' component={ArticlePage} />
+          <Route exact path='/post' component={PostPage} />
+          <Route exact path='/map' component={MapPage} />
         </Switch>
       </div>
     );

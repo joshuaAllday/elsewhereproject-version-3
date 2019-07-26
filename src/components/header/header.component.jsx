@@ -17,7 +17,7 @@ const Header = () => (
             <OptionLink to='/'>
                 Articles
             </OptionLink>
-            <OptionLink to='/'>
+            <OptionLink to='/post'>
                 Post
             </OptionLink>
         </OptionsContainer>
