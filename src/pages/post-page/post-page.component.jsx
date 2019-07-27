@@ -44,6 +44,22 @@ class PostPage extends React.Component {
         return(
             <div className='post-page-container'>
                 <PageCard>
+                    <p className='post-text-containers'>
+                        Uploading to the map? Hell yeah! When you submit the form below,
+                        your article will be send to the editing team behind the project for
+                        grammatical checking and potentially some feedback for you on tweaks
+                        we'd like to see. The best content for the Elsewhere project is locally 
+                        focussed, but globally relevant. Extra points will be given for first-hand 
+                        experiences that challenge perceptions of a place, person, time - anything really. 
+                    </p>
+                    <p className='post-text-containers'>
+                        Last but not least - it's super important to give us either a latitude and longitude,
+                        or a location for where your article appears. Otherwise, we won't know where to put it 
+                        on the map. You can choose anywhere in the world. 
+                    </p>
+                    <p className='post-text-containers'>
+                        There is a min character length of uploading an article: 1000 characters.
+                    </p>
                     <form onSubmit={this.handleSubmit}>
                         <FormInput
                             name='firstname'
@@ -102,9 +118,7 @@ class PostPage extends React.Component {
                             rows="4"
                             required
                         />
-                        <CustomButton type='submit'>
-                            Post
-                        </CustomButton>
+                        <CustomButton type='submit'> Post </CustomButton>
                     </form>
                 </PageCard>
             </div>
