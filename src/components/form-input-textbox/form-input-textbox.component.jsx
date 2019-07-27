@@ -4,9 +4,9 @@ import {
     GroupContainer, 
     FormInputContainer,
     FormInputLabel
-} from './form-input.styles';
+} from './form-input-textbox.styles';
 
-const FormInput = ({handelChange, label, ...props}) => (
+const FormInputTextbox = ({handelChange, label, ...props}) => (
     <GroupContainer>
         <FormInputContainer onChange={handelChange} {...props} />
         {label ? (
@@ -17,4 +17,4 @@ const FormInput = ({handelChange, label, ...props}) => (
     </GroupContainer>
 );
 
-export default FormInput;
+export default FormInputTextbox;
