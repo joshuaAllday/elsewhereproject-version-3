@@ -14,16 +14,31 @@ import MapPage from './pages/map-page/map-page.component';
 import './App.css';
 
 class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      articlePage: false
+    }
+  }
 
   componentDidMount(){
     const { fetchCollectionsStartAsync } = this.props;
 		fetchCollectionsStartAsync();
   }
 
+  onHeader = (articlePage) => {
+    return this.setState({articlePage});
+  }
+
   render(){
+    const { articlePage } = this.state;
     return(
       <div className="App">
-        <Header />
+        {
+          articlePage 
+          ? null
+          : <Header onHeader={this.onHeader} />
+        }
         <Switch>
           <Route exact path='/' component={LandingPage} />
           <Route exact path='/about' component={AboutPage} />

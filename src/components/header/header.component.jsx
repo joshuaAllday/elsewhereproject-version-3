@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { withRouter } from 'react-router-dom';
+
 import { HeaderContainer,
     OptionsContainer, 
     OptionLink 
    } from './header.styles';
 
-const Header = () => (
+const Header = ({onHeader, history}) => (
     <HeaderContainer>
         <OptionsContainer>
             <OptionLink to='/'>
@@ -14,7 +16,14 @@ const Header = () => (
             <OptionLink to='/about'>
                 About
             </OptionLink>
-            <OptionLink to='/map'>
+            <OptionLink 
+                onClick={
+                    () => {
+                        onHeader(true)
+                        history.push('/map')
+                    }
+                }
+            >
                 Articles
             </OptionLink>
             <OptionLink to='/post'>
@@ -24,4 +33,4 @@ const Header = () => (
     </HeaderContainer>
 );
 
-export default Header;
+export default withRouter(Header);
