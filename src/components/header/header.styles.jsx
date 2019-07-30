@@ -8,14 +8,21 @@ export const HeaderContainer = styled.div`
   	justify-content: flex-end;
 	margin-bottom: 25px; 
 	align-items: right;
+	@media screen and (max-width: 800px){
+		justify-content: center;
+	}
 `;
 
 export const OptionsContainer = styled.div`
-	width: 50%;
+	width: 80%;
     height: 100%;
     display: flex;
 	justify-content: flex-end;
+	@media screen and (max-width: 800px){
+		justify-content: center;
+	}
 `;
+
 
 export const OptionLink = styled(Link)`
 	padding: 10px 20px;
@@ -23,6 +30,7 @@ export const OptionLink = styled(Link)`
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
+	margin-top: 10px;
 
 	&:hover{
 		opacity: 0.7;

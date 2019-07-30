@@ -8,9 +8,6 @@ import './landing-page.styles.css';
 
 const LandingPage = () => (
     <div className='landing-page-container'>
-        <h1>
-            Landing Page 
-        </h1>
         <div className='welcome-section'>
             <WelcomeLogo /> 
         </div>

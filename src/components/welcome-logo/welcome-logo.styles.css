@@ -12,14 +12,8 @@
     font-weight: 700;
 }
 
-.learn-more {
-    border-radius: 5px;
-    border: none;
-    color: blue;
-    background-color: white;
-}
-
-.learn-more:hover {
-    color: white;
-    background: black;
+.message-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

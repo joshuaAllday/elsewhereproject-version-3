@@ -3,6 +3,7 @@ import React from 'react';
 import CustomButton from '../../components/custom-button/custom-button.component';
 import FormInput from '../../components/form-input/form-input.component';
 import FormInputTextbox from '../../components/form-input-textbox/form-input-textbox.component';
+import FormInputSelector from '../../components/form-input-option/form-input-option.component';
 
 import PageCard from '../../components/page-card/page-card.component';
 
@@ -25,10 +26,20 @@ class PostPage extends React.Component {
     }
 
     handleSubmit = event => {
-        const { name } = this.state;
+        const { 
+            firstname, lastname
+        } = this.state;
         event.preventDefault();
-        console.log(this.state.firstname);
-        this.setState({[name]: ''})
+        console.log(firstname, lastname)
+        this.setState({
+            firstname: '',
+            lastname: '',
+            email: '',
+            articletitle: '',
+            latitude: '',
+            longitude: '',
+            article: ''
+        });
     };
 
     handleChange = event => {
@@ -40,7 +51,7 @@ class PostPage extends React.Component {
 
 
     render(){
-        const { firstname, lastname, email, articletitle, latitude, longitude, article } = this.state;
+        const { firstname, lastname, email, articletitle, latitude, longitude, article, tag } = this.state;
         return(
             <div className='post-page-container'>
                 <PageCard>
@@ -107,6 +118,13 @@ class PostPage extends React.Component {
                             onChange={this.handleChange}
                             value={longitude}
                             label='Longitude'
+                            required
+                        />
+                        <FormInputSelector
+                            name='tag'
+                            onChange={this.handleChange}
+                            value={tag}
+                            label='Tag'
                             required
                         />
                         <FormInputTextbox

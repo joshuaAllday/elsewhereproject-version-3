@@ -1,10 +1,28 @@
-
+.landing-page-container{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto;
+}
+.welcome-section{
+    width: 60vw;
+}
 .card-section{
-    display: none;
+    width: 500px;
+    margin: 20px 40px;
 }
 
-@media (min-width: 1200px){
+@media screen and (max-width: 1000px) {
+    .landing-page-container{
+        flex-direction: column;
+        width: unset;
+        align-items: center;
+    }
+    .welcome-section{
+        margin-bottom: 60px;
+        width: 100vw;
+    }
     .card-section{
-        display: block;
+        width: 500px;
     }
 }

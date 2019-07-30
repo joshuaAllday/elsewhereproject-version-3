@@ -15,7 +15,7 @@ const Header = () => (
                 About
             </OptionLink>
             <OptionLink to='/map'>
-                Articles
+                Map
             </OptionLink>
             <OptionLink to='/post'>
                 Post

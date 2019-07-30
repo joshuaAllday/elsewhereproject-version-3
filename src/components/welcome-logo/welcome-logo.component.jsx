@@ -17,9 +17,11 @@ const WelcomeLogo = ({history}) => {
                 <p className='message'>
                     This is a Social Journalism Website
                 </p>
-                <CustomButton onClick={()=> history.push('/about')}>
-                    Learn More
-                </CustomButton>
+                <div>
+                    <CustomButton onClick={()=> history.push('/map')}>
+                        Learn More
+                    </CustomButton>
+                </div>
             </div>
         </div>
     );
