@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
@@ -13,42 +13,26 @@ import MapPage from './pages/map-page/map-page.component';
 
 import './App.css';
 
-class App extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      articlePage: false
-    }
-  }
+const App = ({fetchCollectionsStartAsync}) => {
 
-  componentDidMount(){
-    const { fetchCollectionsStartAsync } = this.props;
-		fetchCollectionsStartAsync();
-  }
+  useEffect(()=>{
+    fetchCollectionsStartAsync()
+  }, [fetchCollectionsStartAsync]);
 
-  onHeader = (articlePage) => {
-    return this.setState({articlePage});
-  }
-
-  render(){
-    const { articlePage } = this.state;
-    return(
-      <div className="App">
-        {
-          articlePage 
-          ? null
-          : <Header onHeader={this.onHeader} />
-        }
-        <Switch>
+  return(
+    <div className="App">
+      <Switch>
+        <Route exact path='/map' component={MapPage} />
+        <Fragment>
+          <Header />
           <Route exact path='/' component={LandingPage} />
           <Route exact path='/about' component={AboutPage} />
           <Route exact path='/article/:id' component={ArticlePage} />
           <Route exact path='/post' component={PostPage} />
-          <Route exact path='/map' component={MapPage} />
-        </Switch>
-      </div>
-    );
-  }
+        </Fragment>
+      </Switch>
+    </div>
+  );
 };
 
 const mapDispatchToProps = dispatch => ({
