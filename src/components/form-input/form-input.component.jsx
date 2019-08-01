@@ -10,7 +10,7 @@ const FormInput = ({handelChange, label, ...props}) => (
     <GroupContainer>
         <FormInputContainer onChange={handelChange} {...props} />
         {label ? (
-            <FormInputLabel className={props.value.length ? 'shrink' : ''}>
+            <FormInputLabel {...props} className={props.value.length ? 'shrink' : ''}>
                 {label}
             </FormInputLabel>
         ): null}

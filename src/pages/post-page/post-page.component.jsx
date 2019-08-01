@@ -9,49 +9,105 @@ import PageCard from '../../components/page-card/page-card.component';
 
 import './post-page.styles.css';
 
+const InitialState = {
+    firstname:'',
+    nameError:'',
+    lastname:'',
+    secondNameError: '',
+    email:'',
+    emailError:'',
+    articletitle:'',
+    articletitleError:'',
+    latitude:'',
+    latitudeError:'',
+    longitude:'',
+    longitudeError:'',
+    tag:'',
+    article:'',
+    articleError:'',
+    characterLength: 2500,
+}
+
 class PostPage extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = {
-            firstname:'',
-            lastname:'',
-            email:'',
-            articletitle:'',
-            latitude:'',
-            longitude:'',
-            tag:'',
-            article:''
+        this.state = InitialState
+    }
+
+    validate = () => {
+        let nameError = "";
+        let secondNameError = "";
+        let emailError = "";
+        let articletitleError= "";
+        let latitudeError = "";
+        let longitudeError = "";
+        let articleError = "";
+
+        if (!this.state.firstname){
+            nameError = "error"
         }
+        if (!this.state.lastname){
+            secondNameError = "error"
+        }
+        if (!this.state.email.includes("@")){
+            emailError = "error"
+        }
+        if (!this.state.articletitle){
+            articletitleError = "error"
+        }
+        if (!this.state.latitude ){
+            latitudeError = "error"
+        }
+        if (!this.state.longitude){
+            longitudeError = "error"
+        }
+        if (!this.state.article || this.state.article.length< 2500){
+            articleError = "error"
+        }
+
+        if(nameError || secondNameError || emailError || articletitleError || latitudeError || longitudeError || articleError){
+            this.setState({nameError, secondNameError, emailError, articletitleError, latitudeError, longitudeError, articleError});
+            return false;
+        }
+
+        return true;
     }
 
     handleSubmit = event => {
-        const { 
-            firstname, lastname
-        } = this.state;
         event.preventDefault();
-        console.log(firstname, lastname)
-        this.setState({
-            firstname: '',
-            lastname: '',
-            email: '',
-            articletitle: '',
-            latitude: '',
-            longitude: '',
-            article: ''
-        });
+        const isValid = this.validate();
+        if(isValid){
+            console.log(this.state)
+            this.setState(InitialState);
+        }
     };
 
     handleChange = event => {
         const { value, name } = event.target;
 
-        this.setState({ [name]: value });
+        this.setState({ [name]: value, characterLength: 2500 - (this.state.article.length) });
     }
 
-
-
     render(){
-        const { firstname, lastname, email, articletitle, latitude, longitude, article, tag } = this.state;
+        const { 
+            firstname, 
+            nameError, 
+            lastname, 
+            secondNameError, 
+            email, 
+            emailError, 
+            articletitle,
+            articletitleError,
+            latitude,
+            latitudeError,
+            longitude,
+            longitudeError,
+            tag,
+            article, 
+            articleError,
+            characterLength
+        } = this.state;
         return(
             <div className='post-page-container'>
                 <PageCard>
@@ -68,9 +124,6 @@ class PostPage extends React.Component {
                         or a location for where your article appears. Otherwise, we won't know where to put it 
                         on the map. You can choose anywhere in the world. 
                     </p>
-                    <p className='post-text-containers'>
-                        There is a min character length of uploading an article: 1000 characters.
-                    </p>
                     <form onSubmit={this.handleSubmit}>
                         <FormInput
                             name='firstname'
@@ -78,55 +131,59 @@ class PostPage extends React.Component {
                             onChange={this.handleChange}
                             value={firstname}
                             label='First name'
-                            required
+                            error={nameError}
                         />
+                        
                         <FormInput
                             name='lastname'
                             type='text'
                             onChange={this.handleChange}
                             value={lastname}
                             label='Last name'
-                            required
+                            error={secondNameError}
                         />
+                        
                         <FormInput
                             name='email'
                             type='email'
                             onChange={this.handleChange}
                             value={email}
                             label='Email'
-                            required
-                        />
+                            error={emailError}
+                        /> 
                         <FormInput
                             name='articletitle'
                             type='text'
                             onChange={this.handleChange}
                             value={articletitle}
                             label='Article Title'
-                            required
-                        />
+                            error={articletitleError}
+                         />
                         <FormInput
                             name='latitude'
                             type='number'
                             onChange={this.handleChange}
                             value={latitude}
                             label='Latitude'
-                            required
+                            error={latitudeError}
                         />  
+                        
                         <FormInput
                             name='longitude'
                             type='number'
                             onChange={this.handleChange}
                             value={longitude}
                             label='Longitude'
-                            required
+                            error={longitudeError}
                         />
+                        
                         <FormInputSelector
                             name='tag'
                             onChange={this.handleChange}
                             value={tag}
                             label='Tag'
-                            required
                         />
+                        
                         <FormInputTextbox
                             name='article'
                             type='textarea'
@@ -134,9 +191,12 @@ class PostPage extends React.Component {
                             value={article}
                             label='Article'
                             rows="4"
-                            required
+                            error={articleError}
+                            length={characterLength}
                         />
-                        <CustomButton type='submit'> Post </CustomButton>
+                        <div className='button-container'>
+                            <CustomButton type='submit'> Post </CustomButton>
+                        </div>
                     </form>
                 </PageCard>
             </div>

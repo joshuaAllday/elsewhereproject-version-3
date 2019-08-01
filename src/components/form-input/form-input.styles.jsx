@@ -3,11 +3,23 @@ import styled, { css } from 'styled-components';
 const subColor = 'grey';
 const mainColor = 'black';
 
+const error = css`
+  border-bottom: 1px solid red;
+`;
+
 const shrinkLabelStyles = css`
   top: -14px;
   font-size: 12px;
   color: ${mainColor};
 `;
+
+const getButtonStyles = props => {
+  if (props.error) {
+    return error;
+  }
+
+  return;
+};
 
 export const GroupContainer = styled.div`
   position: relative;
@@ -29,6 +41,7 @@ export const FormInputContainer = styled.input`
   border-radius: 0;
   border-bottom: 1px solid ${subColor};
   margin: 25px 0;
+  ${getButtonStyles}
   &:focus {
     outline: none;
   }
