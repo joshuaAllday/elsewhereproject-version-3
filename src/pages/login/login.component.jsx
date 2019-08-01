@@ -8,13 +8,32 @@ import './login.styles.css';
 
 const InitialState = {
     username:'',
-    password:''
+    usernameError:'',
+    password:'',
+    passwordError:''
 }
 
 class LoginPage extends React.Component{
     constructor(){
         super();
         this.state= InitialState
+    }
+
+    validated = () => {
+        let usernameError = "";
+        let passwordError = "";
+
+        if (!this.state.username){
+            usernameError = "error";
+        }
+        if (!this.state.password){
+            passwordError = "error"
+        }
+        if(usernameError || passwordError){
+            this.setState({ usernameError, passwordError})
+            return false;
+        }
+        return true;
     }
 
     handleChange = event => {
@@ -25,13 +44,16 @@ class LoginPage extends React.Component{
 
     handleSubmit = event => {
         event.preventDefault();
-        const { email, password } = this.state;
-        console.log(email, password)
-        this.setState({ InitialState})
+        const { username, password } = this.state;
+        const isValid = this.validated();
+        if (isValid){
+            console.log(username, password)
+            this.setState(InitialState);
+        }
     }
 
     render(){
-        const { username, password } = this.state;
+        const { username, usernameError, password, passwordError } = this.state;
         return(
             <div>
                 <PageCard>
@@ -42,6 +64,7 @@ class LoginPage extends React.Component{
                             onChange={this.handleChange}
                             value={username}
                             label='Username'
+                            error={usernameError}
                         />
                         <FormInput
                             name='password'
@@ -49,6 +72,7 @@ class LoginPage extends React.Component{
                             onChange={this.handleChange}
                             value={password}
                             label='Password'
+                            error={passwordError}
                         />
                         <div className='button-container'>
                             <CustomButton type='submit'>
