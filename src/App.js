@@ -6,6 +6,8 @@ import { fetchCollectionsStartAsync } from './redux/articles/articles.actions';
 
 import Header from './components/header/header.component';
 import Spinner from './components/spinner/spinner.component';
+import PrivateRoute from './components/private-route/private-route.component';
+import EditPage from './pages/edit-page/edit-page.component';
 
 import './App.css';
 
@@ -34,6 +36,7 @@ const App = ({fetchCollectionsStartAsync}) => {
             <Route exact path='/article/:id' component={ArticlePage} />
             <Route exact path='/post' component={PostPage} />
             <Route exact path='/admin-sign-in' component={LoginPage} />
+            <PrivateRoute isAuth={false} path='/edit-articles' component={EditPage}/>
           </Fragment>
         </Suspense>
       </Switch>
