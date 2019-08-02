@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import PageCard from '../../components/page-card/page-card.component';
 import FormInput from '../../components/form-input/form-input.component';
@@ -49,6 +50,7 @@ class LoginPage extends React.Component{
         if (isValid){
             console.log(username, password)
             this.setState(InitialState);
+            this.props.history.push('/edit-articles')
         }
     }
 
@@ -86,4 +88,4 @@ class LoginPage extends React.Component{
     };
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);
