@@ -1,9 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import PageCard from '../../components/page-card/page-card.component';
 import FormInput from '../../components/form-input/form-input.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
+
+import { signInStartAsync } from '../../redux/users/users.actions';
 
 import './login.styles.css';
 
@@ -15,8 +17,8 @@ const InitialState = {
 }
 
 class LoginPage extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state= InitialState
     }
 
@@ -45,12 +47,13 @@ class LoginPage extends React.Component{
 
     handleSubmit = event => {
         event.preventDefault();
+        const { signInStartAsync } = this.props;
         const { username, password } = this.state;
         const isValid = this.validated();
-        if (isValid){
-            console.log(username, password)
+        if (isValid){    
+            console.log(username, password);
+            signInStartAsync(username, password);
             this.setState(InitialState);
-            this.props.history.push('/edit-articles')
         }
     }
 
@@ -88,4 +91,9 @@ class LoginPage extends React.Component{
     };
 };
 
-export default withRouter(LoginPage);
+const mapDispatchToProps = dispatch => ({
+    signInStartAsync: (username, password) => 
+        dispatch(signInStartAsync({username, password}))
+});
+
+export default connect(null, mapDispatchToProps)(LoginPage);

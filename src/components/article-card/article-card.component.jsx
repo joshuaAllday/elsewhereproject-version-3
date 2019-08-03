@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 
 import './article-card.styles.css';
 
-const ArticleCard = ({id, name, history}) => (
+const ArticleCard = ({id, firstname, history}) => (
     <div className='card-container' onClick = {() => history.push(`/article/${id - 1}`)} >
             <div className='data-container'>
-                <h1>{name}</h1>
+                <h1>{firstname}</h1>
                 {/*<h5 className='article-title'>
                     {articletitle}
                 </h5>

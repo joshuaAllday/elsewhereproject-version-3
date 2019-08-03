@@ -17,7 +17,7 @@ export const fetchCollectionsFailure = errorMessage => ({
 export const fetchCollectionsStartAsync = () => {
     return dispatch => {
         dispatch(fetchCollectionsStart());
-        return fetch('https://jsonplaceholder.typicode.com/users')
+        return fetch("http://localhost:3000/articles")
         .then(response => response.json())
         .then(data => {
             dispatch(fetchCollectionsSuccess(data));
