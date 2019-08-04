@@ -54,7 +54,7 @@ class App extends React.Component {
         </Switch>
       </div>
     );
-    };
+  };
 };
 
 const mapStateToProps = createStructuredSelector({

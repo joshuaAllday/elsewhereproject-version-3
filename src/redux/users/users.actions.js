@@ -30,7 +30,9 @@ export const signInStartAsync = ({username, password}) => {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.username){
+            if (data.userId && data.success === 'true'){
+                console.log(data)
+                window.sessionStorage.setItem('token', data.token);
                 dispatch(signInSuccess(data));
             } else {
                 dispatch(signInFailure(data))
