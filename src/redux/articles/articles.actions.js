@@ -24,4 +24,4 @@ export const fetchCollectionsStartAsync = () => {
         })
         .catch(error => dispatch(fetchCollectionsFailure(error.messgae)));
     }
-};
+}; 

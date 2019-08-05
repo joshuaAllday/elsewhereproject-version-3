@@ -16,6 +16,7 @@ export const signInFailure = error => ({
 
 export const signInStartAsync = ({username, password}) => {
     return dispatch => {
+        dispatch(signInStart());
         return fetch('http://localhost:3000/signin', {
             method: 'POST',
 			headers: {
@@ -31,9 +32,7 @@ export const signInStartAsync = ({username, password}) => {
         .then(response => response.json())
         .then(data => {
             if (data.userId && data.success === 'true'){
-                console.log(data)
-                window.sessionStorage.setItem('token', data.token);
-                dispatch(signInSuccess(data));
+                dispatch(signInSuccess(data.token));
             } else {
                 dispatch(signInFailure(data))
             }
@@ -41,3 +40,47 @@ export const signInStartAsync = ({username, password}) => {
         .catch(error => dispatch(signInFailure(error.message)))
     }
 };
+
+export const signOutStart = () => ({
+    type: UserActionTypes.SIGN_OUT_START
+});
+
+export const signOutSuccess = () => ({
+    type: UserActionTypes.SIGN_OUT_SUCCESS
+});
+
+export const signOutFailure = error => ({
+    type: UserActionTypes.SIGN_OUT_FAILURE,
+    payload: error
+});
+
+export const signOutAsync = () => {
+    return dispatch => {
+        dispatch(signOutStart());
+        let token = JSON.parse(window.localStorage.getItem('persist:root'));
+        token.user = JSON.parse(token.user)
+        console.log(JSON.stringify(token.user.currentUser));
+        return signOutSuccess();
+    };
+}; 
+
+// fetch('http://localhost:3000/signin', {
+//             method: 'DELETE',
+// 			headers: {
+// 			 	'Content-Type': 'application/json',
+// 			 	"cache-control": "no-cache"
+// 			},
+// 			mode: 'cors',
+// 			body: JSON.stringify({
+// 			 	token: window.localStorage.getItem('user.currentUser.token')
+// 			})
+        
+        
+        
+//         fetch("http://localhost:3000/articles")
+//         .then(response => response.json())
+//         .then(data => {
+//             dispatch(fetchCollectionsSuccess(data));
+//         })
+//         .catch(error => dispatch(fetchCollectionsFailure(error.messgae)));
+//     }
