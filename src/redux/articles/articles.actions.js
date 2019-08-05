@@ -17,7 +17,7 @@ export const fetchCollectionsFailure = errorMessage => ({
 export const fetchCollectionsStartAsync = () => {
     return dispatch => {
         dispatch(fetchCollectionsStart());
-        return fetch("http://localhost:3000/articles")
+        return fetch("/articles")
         .then(response => response.json())
         .then(data => {
             dispatch(fetchCollectionsSuccess(data));

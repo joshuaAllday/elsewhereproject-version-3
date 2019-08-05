@@ -2,15 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { toggleAdminDropdown } from '../../redux/dropdown/dropdown.actions';
 import { selectCurrentUser } from '../../redux/users/users.selectors';
-import { signOutAsync } from '../../redux/users/users.actions';
+import { selectDropdownHidden } from '../../redux/dropdown/dropdown.selectors';
+
+import AdminDropdown from '../admin-dropdown/admin-dropdown.component';
 
 import { HeaderContainer,
     OptionsContainer, 
     OptionLink 
    } from './header.styles';
 
-const Header = ({currentUser, signOutAsync}) => (
+const Header = ({currentUser, hidden, toggleAdminDropdown}) => (
     <HeaderContainer>
         <OptionsContainer>
             <OptionLink to='/'>
@@ -27,28 +30,27 @@ const Header = ({currentUser, signOutAsync}) => (
             </OptionLink>
             {
                 currentUser ? (
-                    <>
-                        <OptionLink to='/edit-articles'>
-                            Edit 
-                        </OptionLink>
-                        <OptionLink  as='div' onClick={signOutAsync}>
-                            Log-Off 
-                        </OptionLink>
-                    </>
+                    <OptionLink as='div' onClick={toggleAdminDropdown}>
+                        Admin
+                    </OptionLink>          
                 ) : (
                     null
                 )
             }
+            {hidden ? null : <AdminDropdown />}
         </OptionsContainer>
     </HeaderContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser
+    currentUser: selectCurrentUser,
+    hidden: selectDropdownHidden
 });
-  
+
+
 const mapDispatchToProps = dispatch => ({
-    signOutAsync: () => dispatch(signOutAsync())
+    toggleAdminDropdown: () => dispatch(toggleAdminDropdown())
 });
   
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+  
+export default connect(mapStateToProps,mapDispatchToProps)(Header);

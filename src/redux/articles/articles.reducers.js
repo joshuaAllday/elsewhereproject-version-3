@@ -22,7 +22,7 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
         case ArticlesActionTypes.FETCH_COLLECTIONS_FAILURE :
             return {
                 ...state,
-                isFetching: false,
+                isFetching: true,
                 errorMessage: action.payload
             };
         default : 
