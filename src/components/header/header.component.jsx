@@ -27,9 +27,14 @@ const Header = ({currentUser, signOutAsync}) => (
             </OptionLink>
             {
                 currentUser ? (
-                    <OptionLink  as='div' onClick={signOutAsync}>
-                        SIGN OUT
-                    </OptionLink>
+                    <>
+                        <OptionLink to='/edit-articles'>
+                            Edit 
+                        </OptionLink>
+                        <OptionLink  as='div' onClick={signOutAsync}>
+                            Log-Off 
+                        </OptionLink>
+                    </>
                 ) : (
                     null
                 )

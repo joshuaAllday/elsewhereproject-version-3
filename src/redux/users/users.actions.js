@@ -17,7 +17,7 @@ export const signInFailure = error => ({
 export const signInStartAsync = ({username, password}) => {
     return dispatch => {
         dispatch(signInStart());
-        return fetch('http://localhost:3000/signin', {
+        return fetch('/signin', {
             method: 'POST',
 			headers: {
 			 	'Content-Type': 'application/json',
@@ -60,27 +60,22 @@ export const signOutAsync = () => {
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
         token.user = JSON.parse(token.user)
         console.log(JSON.stringify(token.user.currentUser));
-        return signOutSuccess();
+        let tokens = token.user.currentUser;
+        return fetch('/signout', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': tokens
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success === 'true'){
+                dispatch(signOutSuccess());
+            } else {
+                dispatch(signOutFailure(data))
+            }
+        })
+        .catch(error => dispatch(signOutFailure(error.message)))
     };
 }; 
-
-// fetch('http://localhost:3000/signin', {
-//             method: 'DELETE',
-// 			headers: {
-// 			 	'Content-Type': 'application/json',
-// 			 	"cache-control": "no-cache"
-// 			},
-// 			mode: 'cors',
-// 			body: JSON.stringify({
-// 			 	token: window.localStorage.getItem('user.currentUser.token')
-// 			})
-        
-        
-        
-//         fetch("http://localhost:3000/articles")
-//         .then(response => response.json())
-//         .then(data => {
-//             dispatch(fetchCollectionsSuccess(data));
-//         })
-//         .catch(error => dispatch(fetchCollectionsFailure(error.messgae)));
-//     }
