@@ -33,7 +33,8 @@ export const OptionLink = styled(Link)`
 	margin-top: 10px;
 
 	&:hover{
-		opacity: 0.9;
+		opacity: 0.7;
+		color: black;
 		text-decoration: none;
 	}
 `;

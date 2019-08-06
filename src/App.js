@@ -20,6 +20,7 @@ const PostPage = lazy(() => import('./pages/post-page/post-page.component'));
 const MapPage = lazy(() => import('./pages/map-page/map-page.component'));
 const LoginPage = lazy(() => import('./pages/login/login.component'));
 const EditPage = lazy(() => import('./pages/edit-page/edit-page.component'));
+const RegisterPage = lazy(() => import('./pages/register-page/register-page.component'));
 
 class App extends React.Component {
 
@@ -48,6 +49,7 @@ class App extends React.Component {
                 }
               />
               <PrivateRoute isAuth={currentUser} path='/edit-articles' component={EditPage}/>
+              <PrivateRoute isAuth={currentUser} path='/register-user' component={RegisterPage}/>
             </Fragment>
           </Suspense>
         </Switch>

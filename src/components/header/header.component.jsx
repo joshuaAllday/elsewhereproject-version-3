@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { toggleAdminDropdown } from '../../redux/dropdown/dropdown.actions';
 import { selectCurrentUser } from '../../redux/users/users.selectors';
 import { selectDropdownHidden } from '../../redux/dropdown/dropdown.selectors';
+import { toggleAdminDropdown } from '../../redux/dropdown/dropdown.actions';
 
 import AdminDropdown from '../admin-dropdown/admin-dropdown.component';
 
@@ -32,7 +32,7 @@ const Header = ({currentUser, hidden, toggleAdminDropdown}) => (
                 currentUser ? (
                     <OptionLink as='div' onClick={toggleAdminDropdown}>
                         Admin
-                    </OptionLink>          
+                    </OptionLink>     
                 ) : (
                     null
                 )
@@ -47,10 +47,8 @@ const mapStateToProps = createStructuredSelector({
     hidden: selectDropdownHidden
 });
 
-
 const mapDispatchToProps = dispatch => ({
     toggleAdminDropdown: () => dispatch(toggleAdminDropdown())
 });
-  
   
 export default connect(mapStateToProps,mapDispatchToProps)(Header);

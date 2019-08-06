@@ -1,4 +1,6 @@
 import UserActionTypes from './users.types';
+import {toggleAdminDropdown} from '../dropdown/dropdown.actions';
+
 
 export const signInStart = () => ({
     type:UserActionTypes.SIGN_IN_START
@@ -58,8 +60,7 @@ export const signOutAsync = () => {
     return dispatch => {
         dispatch(signOutStart());
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
-        token.user = JSON.parse(token.user)
-        console.log(JSON.stringify(token.user.currentUser));
+        token.user = JSON.parse(token.user);
         let tokens = token.user.currentUser;
         return fetch('/signout', {
             method: 'DELETE',
@@ -72,8 +73,9 @@ export const signOutAsync = () => {
         .then(data => {
             if(data.success === 'true'){
                 dispatch(signOutSuccess());
+                dispatch(toggleAdminDropdown());
             } else {
-                dispatch(signOutFailure(data))
+                dispatch(signOutFailure(data));
             }
         })
         .catch(error => dispatch(signOutFailure(error.message)))
