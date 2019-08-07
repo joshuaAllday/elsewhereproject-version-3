@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { signOutAsync } from '../../redux/users/users.actions';
+import { signOutStartAsync } from '../../redux/users/users.actions';
 import { toggleAdminDropdown } from '../../redux/dropdown/dropdown.actions';
 
 import {
@@ -10,7 +10,7 @@ import {
     AdminLink
 } from './admin-dropdown.styles';
 
-const AdminDropdown = ({signOutAsync, toggleAdminDropdown}) => (
+const AdminDropdown = ({signOutStartAsync, toggleAdminDropdown}) => (
     <AdminDropdownContainer>
         <AdminItemsContainer>
             <AdminLink to='/edit-articles' onClick={toggleAdminDropdown}>
@@ -19,7 +19,7 @@ const AdminDropdown = ({signOutAsync, toggleAdminDropdown}) => (
             <AdminLink to='/register-user' onClick={toggleAdminDropdown}>
                 Register Admins
             </AdminLink>
-            <AdminLink as='div' onClick={signOutAsync} >
+            <AdminLink as='div' onClick={signOutStartAsync} >
                 Sign Out
             </AdminLink>
         </AdminItemsContainer>
@@ -27,7 +27,7 @@ const AdminDropdown = ({signOutAsync, toggleAdminDropdown}) => (
 );
 
 const mapDispatchToProps = dispatch => ({
-    signOutAsync: () => dispatch(signOutAsync()),
+    signOutStartAsync: () => dispatch(signOutStartAsync()),
     toggleAdminDropdown: () => dispatch(toggleAdminDropdown())
 });
 

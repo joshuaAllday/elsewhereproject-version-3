@@ -88,7 +88,7 @@ class LoginPage extends React.Component{
                 </PageCard>
             </div>
         );
-    };
+    }; 
 };
 
 const mapDispatchToProps = dispatch => ({

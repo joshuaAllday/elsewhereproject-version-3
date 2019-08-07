@@ -19,7 +19,7 @@ const ArticleCardList = ({collections}) => {
 
 
 const mapStateToProps = createStructuredSelector({
-    collections: selectCollections, 
+    collections: selectCollections 
 });
 
 export default connect(mapStateToProps)(ArticleCardList);

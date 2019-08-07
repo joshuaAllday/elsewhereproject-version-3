@@ -13,7 +13,7 @@ const LandingPage = () => (
         </div>
         <div className='card-section' >
             <h3>
-                Article Card List 
+                Latest Articles
             </h3>
             <ScrollableContainer>
                 <ArticleCardListContainer />

@@ -1,7 +1,7 @@
 import UserActionTypes from './users.types';
 import {toggleAdminDropdown} from '../dropdown/dropdown.actions';
 
-
+// sign-in reducer functions
 export const signInStart = () => ({
     type:UserActionTypes.SIGN_IN_START
 });
@@ -43,6 +43,8 @@ export const signInStartAsync = ({username, password}) => {
     }
 };
 
+// sign-out reducer functions
+
 export const signOutStart = () => ({
     type: UserActionTypes.SIGN_OUT_START
 });
@@ -56,7 +58,7 @@ export const signOutFailure = error => ({
     payload: error
 });
 
-export const signOutAsync = () => {
+export const signOutStartAsync = () => {
     return dispatch => {
         dispatch(signOutStart());
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
@@ -81,3 +83,50 @@ export const signOutAsync = () => {
         .catch(error => dispatch(signOutFailure(error.message)))
     };
 }; 
+
+// Register reducer functions
+
+export const registerStart = () => ({
+    type: UserActionTypes.REGISTER_START
+});
+
+export const registerSuccess = data => ({
+    type: UserActionTypes.REGISTER_SUCCESS,
+    payload: data
+});
+
+export const registerFailure = error => ({
+    type: UserActionTypes.REGISTER_FAILURE,
+    payload: error
+});
+
+export const registerStartAsync = ({username, password}) => {
+    return dispatch => {
+        dispatch(registerStart());
+        let token = JSON.parse(window.localStorage.getItem('persist:root'));
+        token.user = JSON.parse(token.user);
+        let tokens = token.user.currentUser;
+        return fetch('/register', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'authorization': tokens
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if(data.success === 'true'){
+                dispatch(registerSuccess(data))
+            } else {
+                dispatch(registerFailure(data))
+            }
+        })
+        .catch(error => dispatch(registerFailure(error.message)))
+    }
+
+};

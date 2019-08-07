@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import FormInput from '../../components/form-input/form-input.component';
 import PageCard from '../../components/page-card/page-card.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
+
+import {registerStartAsync} from '../../redux/users/users.actions';
 
 import './register-page.styles.css';
 
@@ -13,7 +16,7 @@ const Initial_State = {
     passwordError:'',
     passwordcheck:'',
     passwordcheckError:''
-}
+};
 
 class RegisterPage extends React.Component {
     constructor(){
@@ -53,9 +56,11 @@ class RegisterPage extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         const { username, password, passwordcheck } = this.state;
+        const{ registerStartAsync } = this.props;
         const isValid = this.validate();
         if(isValid){
             console.log(username, password, passwordcheck);
+            registerStartAsync(username, password);
             this.setState(Initial_State);
         }
     };
@@ -65,6 +70,9 @@ class RegisterPage extends React.Component {
         return(
             <div className='register-page-container'>
                 <PageCard>
+                    <p>
+                        Register an admin here! Enter a unique username and password.
+                    </p>
                     <form onSubmit={this.handleSubmit}>
                         <FormInput 
                             name='username'
@@ -100,4 +108,9 @@ class RegisterPage extends React.Component {
     };
 };
 
-export default RegisterPage;
+const mapDispatchToProps = dispatch => ({
+    registerStartAsync: (username, password) => 
+    dispatch(registerStartAsync({username, password}))
+});
+
+export default connect(null, mapDispatchToProps)(RegisterPage);

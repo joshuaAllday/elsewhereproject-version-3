@@ -1,8 +1,13 @@
 import React from 'react';
 
+import PageCard from '../../components/page-card/page-card.component';
+import SearchableArticlelistContainer from '../../components/searchable-articlelist/searchable-articlelist.container';
+
 const EditPage = () => (
     <div>
-        <h1>Edit Page </h1>
+        <PageCard>
+            <SearchableArticlelistContainer />
+        </PageCard>
     </div>
 );
 

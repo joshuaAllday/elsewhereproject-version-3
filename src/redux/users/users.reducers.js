@@ -2,7 +2,9 @@ import UserActionTypes from './users.types';
 
 const INITIAL_STATE = {
     currentUser: null, 
-    error: null
+    error: null,
+    isSending: false,
+    posted: null
 };
 
 const usersReducer = (state=INITIAL_STATE, action) => {
@@ -19,8 +21,20 @@ const usersReducer = (state=INITIAL_STATE, action) => {
                 currentUser: null,
                 error: null
             };
+        case UserActionTypes.REGISTER_START :
+            return {
+                ...state,
+                isSending: true
+            };
+        case UserActionTypes.REGISTER_SUCCESS :
+            return {
+                ...state,
+                posted: action.payload,
+                isSending:false
+            };
         case UserActionTypes.SIGN_IN_FAILURE : 
         case UserActionTypes.SIGN_OUT_FAILURE :
+        case UserActionTypes.REGISTER_FAILURE :
             return {
                 ...state,
                 error: action.payload
