@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { postArticleStartAsync } from '../../redux/articles/articles.actions';
 
 import CustomButton from '../../components/custom-button/custom-button.component';
 import FormInput from '../../components/form-input/form-input.component';
 import FormInputTextbox from '../../components/form-input-textbox/form-input-textbox.component';
 import FormInputSelector from '../../components/form-input-option/form-input-option.component';
-
 import PageCard from '../../components/page-card/page-card.component';
 
 import './post-page.styles.css';
@@ -76,10 +78,15 @@ class PostPage extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        const { postArticleStartAsync } = this.props;
+        const { firstname, lastname, email, articletitle, latitude, longitude, tag, article } = this.state;
         const isValid = this.validate();
         if(isValid){
-            console.log(this.state)
+            postArticleStartAsync(firstname, lastname, email, articletitle, latitude, longitude, tag, article);
+            console.log(this.state);
             this.setState(InitialState);
+        } else {
+            console.log(tag);
         }
     };
 
@@ -151,6 +158,7 @@ class PostPage extends React.Component {
                             label='Email'
                             error={emailError}
                         /> 
+
                         <FormInput
                             name='articletitle'
                             type='text'
@@ -159,12 +167,14 @@ class PostPage extends React.Component {
                             label='Article Title'
                             error={articletitleError}
                          />
+
                         <FormInput
                             name='latitude'
                             type='number'
                             onChange={this.handleChange}
                             value={latitude}
                             label='Latitude'
+                            step=".01"
                             error={latitudeError}
                         />  
                         
@@ -174,14 +184,21 @@ class PostPage extends React.Component {
                             onChange={this.handleChange}
                             value={longitude}
                             label='Longitude'
+                            step=".01"
                             error={longitudeError}
                         />
                         
+                        {/*<select name="tag" onChange={this.handleChange}>
+                            <option value="volvo">Article</option>
+                            <option value="saab"></option>
+                            <option value="fiat">Fiat</option>
+                            <option value="audi">Audi</option>
+        </select>*/}
                         <FormInputSelector
                             name='tag'
                             onChange={this.handleChange}
-                            value={tag}
                             label='Tag'
+                            value={tag}
                         />
                         
                         <FormInputTextbox
@@ -194,6 +211,7 @@ class PostPage extends React.Component {
                             error={articleError}
                             length={characterLength}
                         />
+
                         <div className='button-container'>
                             <CustomButton type='submit'> Post </CustomButton>
                         </div>
@@ -204,4 +222,9 @@ class PostPage extends React.Component {
     };
 };
 
-export default PostPage;
+const mapDispatchToProps = dispatch => ({
+    postArticleStartAsync: (firstname, lastname, email, articletitle, latitude, longitude, tag, article) => 
+    dispatch(postArticleStartAsync({firstname, lastname, email, articletitle, latitude, longitude, tag, article}))
+});
+
+export default connect(null, mapDispatchToProps)(PostPage);

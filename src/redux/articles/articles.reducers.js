@@ -3,7 +3,9 @@ import ArticlesActionTypes from './articles.types';
 const INITIAL_STATE = {
     collections: null, 
     isFetching: true,
-    errorMessage: undefined
+    errorMessage: undefined,
+    isPosting: true,
+    Posted: null
 };
 
 const articlesReducer = (state = INITIAL_STATE, action ) => {
@@ -19,6 +21,18 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
                 isFetching: false,
                 collections: action.payload
             };
+        case ArticlesActionTypes.POST_ARTICLE_START :
+            return {
+                ...state,
+                isPosting: true
+            };
+        case ArticlesActionTypes.POST_ARTICLE_SUCCESS :
+            return {
+                ...state,
+                isPosting: false, 
+                Posted: action.payload
+            };
+        case ArticlesActionTypes.POST_ARTICLE_FAILURE :
         case ArticlesActionTypes.FETCH_COLLECTIONS_FAILURE :
             return {
                 ...state,
@@ -28,6 +42,6 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
         default : 
             return state;
     }
-}
+};
 
 export default articlesReducer;

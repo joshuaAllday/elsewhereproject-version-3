@@ -1,4 +1,4 @@
-import React, {Fragment, lazy, Suspense} from 'react';
+import React, {lazy, Suspense} from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -11,7 +11,6 @@ import Spinner from './components/spinner/spinner.component';
 import PrivateRoute from './components/private-route/private-route.component';
 
 import './App.css';
-
 
 const LandingPage = lazy(() => import('./pages/landing-page/landing-page.component'));
 const AboutPage = lazy(() => import('./pages/about-page/about-page.component'));
@@ -34,23 +33,23 @@ class App extends React.Component {
       <div className="App">
         <Switch>
           <Suspense fallback={<Spinner />}>
+            {
+              window.location.pathname ==='/map' ? '' : <Header/>
+            }
+            <Route exact path='/' component={LandingPage} />
+            <Route exact path='/about' component={AboutPage} />
+            <Route exact path='/article/:id' component={ArticlePage} />
+            <Route exact path='/post' component={PostPage} />
             <Route exact path='/map' component={MapPage} />
-            <Fragment>
-              <Header />
-              <Route exact path='/' component={LandingPage} />
-              <Route exact path='/about' component={AboutPage} />
-              <Route exact path='/article/:id' component={ArticlePage} />
-              <Route exact path='/post' component={PostPage} />
-              <Route
-                exact
-                path='/admin-sign-in'
-                render={() =>
-                  currentUser ? <Redirect to='/edit-articles' /> : <LoginPage />
-                }
-              />
-              <PrivateRoute isAuth={currentUser} path='/edit-articles' component={EditPage}/>
-              <PrivateRoute isAuth={currentUser} path='/register-user' component={RegisterPage}/>
-            </Fragment>
+            <Route
+              exact
+              path='/admin-sign-in'
+              render={() =>
+                currentUser ? <Redirect to='/edit-articles' /> : <LoginPage />
+              }
+            />
+            <PrivateRoute isAuth={currentUser} path='/edit-articles' component={EditPage}/>
+            <PrivateRoute isAuth={currentUser} path='/register-user' component={RegisterPage}/>
           </Suspense>
         </Switch>
       </div>
