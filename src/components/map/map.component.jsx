@@ -5,6 +5,8 @@ import {createStructuredSelector} from 'reselect';
 import Modal from '../modal/modal.component';
 import ModalArticle from '../modal-article/modal-article.component';
 
+import { selectModalHidden } from '../../redux/modal/modal.selectors';
+import { toggleModal } from '../../redux/modal/modal.actions';
 import { selectCollections } from '../../redux/articles/articles.selectors';
 
 import './map.styles.css';
@@ -14,7 +16,6 @@ class MapComponent extends React.Component {
     super();
     this.state={
       article: '',
-      toggle: true
     }
   }
   componentDidMount(){
@@ -44,6 +45,7 @@ class MapComponent extends React.Component {
         var z2 = { maxZoom: 12};
         map.setOptions(z1);
         map.setOptions(z2);
+        // eslint-disable-next-line
         this.props.collections.map((article) => {
             var articleid = article;
             var dot = "red"
@@ -70,15 +72,18 @@ class MapComponent extends React.Component {
                 url: "http://maps.google.com/mapfiles/ms/icons/" + dot +"-dot.png"
               }
             })
-            marker.addListener('click', (e) => {this.setState({article: articleid, toggle: !this.state.toggle})}, false)
+            marker.addListener('click', (e) => {
+              this.setState({article: articleid});
+              return this.props.toggleModal()
+            },false)
         })
     }
 
     render(){
-        console.log(this.state.id, this.state.toggle)
+        const { hidden } = this.props;
         return(
             <div>
-              {this.state.toggle
+              {hidden
                 ? null
                 : <Modal>
                     <ModalArticle article={this.state.article} /> 
@@ -101,8 +106,13 @@ function loadScript(){
 
 
 const mapStateToProps = createStructuredSelector({
-    collections: selectCollections
-})
+    collections: selectCollections,
+    hidden: selectModalHidden
+});
 
-export default connect(mapStateToProps)(MapComponent);
+const mapDispatchToProps = dispatch => ({
+  toggleModal: () => dispatch(toggleModal())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
 
