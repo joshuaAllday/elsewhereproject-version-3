@@ -1,26 +1,41 @@
-import React, {useState} from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { selectModalHidden } from '../../redux/modal/modal.selectors';
+import { toggleModal } from '../../redux/modal/modal.actions';
 
 import {ArticleContainer} from './article-edit.styles';
 
 import Modal from '../modal/modal.component';
 import ModalEditArticle from '../modal-edit-article/modal-edit-article.component';
 
-const ArticleEdit = ({article}) => {
-    const [toggle, setToggle] = useState(false)
+const ArticleEdit = ({article, hidden, toggleModal}) => {
     return(
-        <>
-            {toggle && 
-                <Modal>
+        <div>
+            {
+                hidden ? null
+                : (<Modal>
                     <ModalEditArticle article={article} />
-                </Modal>
+                 </Modal>)
             }
-            <ArticleContainer onClick={() => setToggle(!toggle) }>
+            <ArticleContainer onClick={toggleModal}>
                 <h5>
                     {article.articletitle}
                 </h5>
             </ArticleContainer>
-        </>
+        </div>
     );
 };
 
-export default ArticleEdit;
+
+const mapStateToProps = createStructuredSelector({
+    hidden: selectModalHidden
+});
+
+const mapDispatchToProps = dispatch => ({
+    toggleModal: () => dispatch(toggleModal())
+});
+  
+
+export default connect(mapStateToProps,mapDispatchToProps)(ArticleEdit);

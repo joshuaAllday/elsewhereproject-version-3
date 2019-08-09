@@ -1,6 +1,10 @@
 import React from 'react';
+
+import ModalOverlay from '../modal-overlay/modal-overlay.component';
+import CustomButton from '../custom-button/custom-button.component';
 import FormInputEdit from '../form-input-edit/form-input-edit.component';
 import FormInputEditTextbox from '../form-input-edit-textbox/form-input-edit-textbox.component';
+
 import './modal-edit-article.styles.css';
 
 class ModalEditArticle extends React.Component{
@@ -14,7 +18,8 @@ class ModalEditArticle extends React.Component{
     render(){
         const { article } = this.props;
         return(
-            <div className='modal-container'>
+            <div>
+                <ModalOverlay />
                 <div className='article-edit-container'>
                     <div className='input-container'>
                         <FormInputEdit
@@ -54,6 +59,11 @@ class ModalEditArticle extends React.Component{
                             rows="10"
                             defaultValue={article.article}
                         />
+                        <div className='save-button'>
+                            <CustomButton>
+                                Save
+                            </CustomButton>
+                        </div>
                     </div>
                 </div>
             </div>

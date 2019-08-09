@@ -2,18 +2,32 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 
+import Modal from '../modal/modal.component';
+import ModalArticle from '../modal-article/modal-article.component';
+
 import { selectCollections } from '../../redux/articles/articles.selectors';
 
 import './map.styles.css';
 
 class MapComponent extends React.Component {
-    componentDidMount(){
+  constructor(){
+    super();
+    this.state={
+      article: '',
+      toggle: true
+    }
+  }
+  componentDidMount(){
 		this.renderMap();
 	}
 
     renderMap(){
         loadScript();
         window.initMap = this.initMap;
+    };
+
+    modalToggle(article){
+      console.log(article)
     };
 
     initMap = () => {
@@ -30,18 +44,11 @@ class MapComponent extends React.Component {
         var z2 = { maxZoom: 12};
         map.setOptions(z1);
         map.setOptions(z2);
-        var infowindow = new window.google.maps.InfoWindow()
-        // eslint-disable-next-line
         this.props.collections.map((article) => {
-            var contentString = '<div id="content">'+
-              `<div id= "container">`+
-              `<h1 id="firstHeading" class="firstHeading">${article.name}</h1>`+
-              `</div>`+
-              '</div>';
-
+            var articleid = article;
             var dot = "red"
             if (article.tag === 'News') {
-                  dot = "green"
+              dot = "green"
             }
             if (article.tag ==='Nature'){
               dot = "purple"
@@ -63,30 +70,21 @@ class MapComponent extends React.Component {
                 url: "http://maps.google.com/mapfiles/ms/icons/" + dot +"-dot.png"
               }
             })
-            // Click on A Marker!
-            marker.addListener('mouseover', function() {
-
-              // Change the content
-              infowindow.setContent(contentString)
-
-              // Open An InfoWindow
-              infowindow.open(map, marker)
-            },false)
-
-            marker.addListener('mouseout', function(){
-              infowindow.close(map,marker)
-            },false)
-
-            marker.addListener('click', function(){
-              window.location.href = this.url;
-            }, false)
+            marker.addListener('click', (e) => {this.setState({article: articleid, toggle: !this.state.toggle})}, false)
         })
     }
 
     render(){
+        console.log(this.state.id, this.state.toggle)
         return(
             <div>
-                <div id="map"></div>
+              {this.state.toggle
+                ? null
+                : <Modal>
+                    <ModalArticle article={this.state.article} /> 
+                  </Modal>
+              }
+              <div id="map"></div>
             </div>
         );
     };

@@ -6,7 +6,6 @@ import { postArticleStartAsync } from '../../redux/articles/articles.actions';
 import CustomButton from '../../components/custom-button/custom-button.component';
 import FormInput from '../../components/form-input/form-input.component';
 import FormInputTextbox from '../../components/form-input-textbox/form-input-textbox.component';
-import FormInputSelector from '../../components/form-input-option/form-input-option.component';
 import PageCard from '../../components/page-card/page-card.component';
 
 import './post-page.styles.css';
@@ -194,12 +193,7 @@ class PostPage extends React.Component {
                             <option value="fiat">Fiat</option>
                             <option value="audi">Audi</option>
         </select>*/}
-                        <FormInputSelector
-                            name='tag'
-                            onChange={this.handleChange}
-                            label='Tag'
-                            value={tag}
-                        />
+                        
                         
                         <FormInputTextbox
                             name='article'

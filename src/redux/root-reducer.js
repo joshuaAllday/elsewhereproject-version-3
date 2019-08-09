@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import articlesReducer from './articles/articles.reducers';
 import usersReducer from './users/users.reducers';
 import dropdownReducer from './dropdown/dropdown.reducers';
+import modalReducer from './modal/modal.reducer';
 
 const persistConfig = {
     key: 'root',
@@ -15,7 +16,8 @@ const persistConfig = {
 const rootReducer =  combineReducers({
     articles: articlesReducer,
     user: usersReducer,
-    dropdown: dropdownReducer
+    dropdown: dropdownReducer,
+    modal: modalReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

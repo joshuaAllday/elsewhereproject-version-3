@@ -34,7 +34,7 @@ class App extends React.Component {
         <Switch>
           <Suspense fallback={<Spinner />}>
             {
-              window.location.pathname ==='/map' ? '' : <Header/>
+              window.location.pathname ==='/map' ? null : <Header/>
             }
             <Route exact path='/' component={LandingPage} />
             <Route exact path='/about' component={AboutPage} />
