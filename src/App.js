@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -9,6 +9,7 @@ import { fetchCollectionsStartAsync } from './redux/articles/articles.actions';
 import Header from './components/header/header.component';
 import Spinner from './components/spinner/spinner.component';
 import PrivateRoute from './components/private-route/private-route.component';
+import ErrorBoundary from './components/error-boundary/error-boundary.component';
 
 import './App.css';
 
@@ -21,17 +22,16 @@ const LoginPage = lazy(() => import('./pages/login/login.component'));
 const EditPage = lazy(() => import('./pages/edit-page/edit-page.component'));
 const RegisterPage = lazy(() => import('./pages/register-page/register-page.component'));
 
-class App extends React.Component {
+const App = ({fetchCollectionsStartAsync, currentUser}) =>  {
 
-  componentDidMount(){
-    this.props.fetchCollectionsStartAsync();
-  }
+  useEffect(() => {
+    fetchCollectionsStartAsync();
+  }, [fetchCollectionsStartAsync]);
 
-  render(){
-    const { currentUser } = this.props;
-    return(
-      <div className="App">
-        <Switch>
+  return(
+    <div className="App">
+      <Switch>
+        <ErrorBoundary>
           <Suspense fallback={<Spinner />}>
             {
               window.location.pathname ==='/map' ? null : <Header/>
@@ -51,15 +51,15 @@ class App extends React.Component {
             <PrivateRoute isAuth={currentUser} path='/edit-articles' component={EditPage}/>
             <PrivateRoute isAuth={currentUser} path='/register-user' component={RegisterPage}/>
           </Suspense>
-        </Switch>
-      </div>
-    );
-  };
+        </ErrorBoundary>
+      </Switch>
+    </div>
+  );
 };
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
-})
+});
 
 const mapDispatchToProps = dispatch => ({
 	fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())

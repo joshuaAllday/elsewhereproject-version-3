@@ -62,7 +62,7 @@ export const postArticleStartAsync = ({firstname,lastname,email,articletitle,lat
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            if(data.success === 'true'){
+            if(data.success === true){
                 dispatch(postArticleSuccess(data))
             } else {
                 dispatch(postArticleFailure(data))

@@ -16,9 +16,11 @@ const ModalArticle = ({article, toggleModal}) => (
                 <h5> -{article.tag} </h5>
                 <h5>{article.firstname}  {article.lastname}</h5>
             </header>
-            <main className='article-main-body'>
-                {article.article}
-            </main>
+            <div className='article-scroll'>
+                <main className='article-main-body'>
+                    {article.article}
+                </main>
+            </div>
         </div>
     </div>
 );

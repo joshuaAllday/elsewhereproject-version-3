@@ -1,23 +1,21 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 
 import './article-card.styles.css';
 
-const ArticleCard = ({id, firstname, history}) => (
-    <div className='card-container' onClick = {() => history.push(`/article/${id - 1}`)} >
-            <div className='data-container'>
-                <h1>{firstname}</h1>
-                {/*<h5 className='article-title'>
-                    {articletitle}
-                </h5>
-                <p className='tag'>
-                - {tag}
-                </p>
-                <p className='article-author'>
-                    {firstname} {lastname}
-                </p>*/}
-            </div>
+const ArticleCard = ({otherCollectionProps}) => (
+    <div className='card-container'>
+        <div className='data-container'>
+            <h5 className='article-title'>
+                {otherCollectionProps.articletitle}
+            </h5>
+            <p className='tag'>
+                - {otherCollectionProps.tag}
+            </p>
+            <p className='article-author'>
+                {otherCollectionProps.firstname} {otherCollectionProps.lastname}
+            </p>
+        </div>
     </div>
 );
 
-export default withRouter(ArticleCard);
+export default ArticleCard;

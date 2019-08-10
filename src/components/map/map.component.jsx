@@ -66,7 +66,7 @@ class MapComponent extends React.Component {
             }
             // Create A Marker
             var marker = new window.google.maps.Marker({
-              position: {lat: 22 , lng: 22},
+              position: {lat: article.latitude , lng: article.longitude},
               map: map,
               icon:{
                 url: "http://maps.google.com/mapfiles/ms/icons/" + dot +"-dot.png"

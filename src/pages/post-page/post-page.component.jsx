@@ -23,7 +23,7 @@ const InitialState = {
     latitudeError:'',
     longitude:'',
     longitudeError:'',
-    tag:'',
+    tag:'Article',
     article:'',
     articleError:'',
     characterLength: 2500,
@@ -84,8 +84,6 @@ class PostPage extends React.Component {
             postArticleStartAsync(firstname, lastname, email, articletitle, latitude, longitude, tag, article);
             console.log(this.state);
             this.setState(InitialState);
-        } else {
-            console.log(tag);
         }
     };
 
@@ -186,14 +184,13 @@ class PostPage extends React.Component {
                             step=".01"
                             error={longitudeError}
                         />
-                        
-                        {/*<select name="tag" onChange={this.handleChange}>
-                            <option value="volvo">Article</option>
-                            <option value="saab"></option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-        </select>*/}
-                        
+
+                        <select name='tag' type='select' value={tag} onChange={this.handleChange}>
+                            <option defaultValue>Article</option>
+                            <option value="Business">Business</option>
+                            <option value="News">News</option>
+                            <option value="Travel">Travel</option>
+                        </select>
                         
                         <FormInputTextbox
                             name='article'
