@@ -6,9 +6,8 @@ import { selectCollections } from '../../redux/articles/articles.selectors';
 
 import ArticleListEdit from '../articlelist-edit/articlelist-edit.component';
 import SearchBox from '../searchbox/searchbox.component';
-import ScrollableContainer from '../scrollable-container/scrollable-container.component';
 
-import { ArticleList } from './searchable-articlelist.styles';
+import { ArticleList, ScrollableContainer } from './searchable-articlelist.styles';
 
 class SearchableArticlelist extends React.Component {
     constructor(){

@@ -8,3 +8,9 @@ export const ArticleList = styled.div`
     width: unset;
     align-items: center;
 `;
+
+export const ScrollableContainer = styled.div`
+    overflow-y: scroll;
+    height: 500px;
+    width: 500px;
+`;
