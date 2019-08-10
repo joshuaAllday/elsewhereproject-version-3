@@ -71,3 +71,51 @@ export const postArticleStartAsync = ({firstname,lastname,email,articletitle,lat
         .catch(error => dispatch(postArticleFailure(error.message)))
     }
 };
+
+export const editArticleStart = () => ({
+    type: ArticlesActionTypes.EDIT_ARTICLE_START
+});
+
+export const editArticleSuccess = data => ({
+    type: ArticlesActionTypes.EDIT_ARTICLE_SUCCESS,
+    payload: data
+});
+
+export const editArticleFailure = errorMessage => ({
+    type: ArticlesActionTypes.EDIT_ARTICLE_FAILURE,
+    payload: errorMessage
+});
+
+export const editArticleStartAsync = ({id, firstname,lastname,articletitle,latitude,longitude,article}) => {
+    return dispatch => {
+        dispatch(editArticleStart());
+        let token = JSON.parse(window.localStorage.getItem('persist:root'));
+        token.user = JSON.parse(token.user);
+        let tokens = token.user.currentUser;
+        return fetch('/editarticle', {
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json',
+                authorization: tokens
+            },
+            body: JSON.stringify({
+                id: id,
+                firstname: firstname,
+                lastname: lastname,
+                articletitle: articletitle,
+                latitude: latitude,
+                longitude: longitude,
+                article: article
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success === true){
+                dispatch(editArticleSuccess(data))
+            } else {
+                dispatch(editArticleFailure(data))
+            }
+        })
+        .catch(error => dispatch(editArticleFailure(error.message)))
+    }
+};

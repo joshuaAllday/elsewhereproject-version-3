@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     collections: null, 
     isFetching: true,
     errorMessage: undefined,
-    isPosting: true,
+    isPosting: false,
     Posted: null
 };
 
@@ -32,6 +32,18 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
                 isPosting: false, 
                 Posted: action.payload
             };
+        case ArticlesActionTypes.EDIT_ARTICLE_START :
+            return {
+                ...state,
+                isPosting: true
+            };
+        case ArticlesActionTypes.EDIT_ARTICLE_SUCCESS :
+            return {
+                ...state,
+                isPosting: false,
+                Edited: action.payload
+            };
+        case ArticlesActionTypes.EDIT_ARTICLE_FAILURE :
         case ArticlesActionTypes.POST_ARTICLE_FAILURE :
         case ArticlesActionTypes.FETCH_COLLECTIONS_FAILURE :
             return {

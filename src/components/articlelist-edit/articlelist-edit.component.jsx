@@ -14,37 +14,36 @@ class ArticleListEdit extends React.Component {
     constructor(){
         super();
         this.state = {
-            article:''
+            passArticle:''
         }
     }
 
-    modalClick = ({article}) => {
-        this.setState({article: article})
+    modalClick = (filteredArticle) => {
+        console.log(filteredArticle)
+        this.setState({passArticle: filteredArticle})
         this.props.toggleModal();
     }
 
     render(){
         const { filteredArticles, hidden } = this.props;
-        const { article } = this.state;
+        const { passArticle } = this.state;
         return(
             <div>
                 {
-                    filteredArticles.map((article, i) => {
-                        return(
-                            <div key={i} onClick={() => {this.modalClick(article)}}>
+                    filteredArticles.map((filteredArticle, i) => {
+                        return <div key={i} onClick={(e) => {this.modalClick(filteredArticle)}}>
                                 <ArticleCard 
                                     key={i} 
-                                    otherCollectionProps={article}
+                                    otherCollectionProps={filteredArticle}
                                 />
                             </div>
-                        );
                     })
                 }
                 {
                     hidden 
                     ? null
                     : <Modal>
-                        <ModalEditArticle article={article} />
+                        <ModalEditArticle article={passArticle} />
                     </Modal>
                 }
             </div>
