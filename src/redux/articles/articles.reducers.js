@@ -48,9 +48,6 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
             let existingArticle = state.collections.find(
                 article => article.id === actions.id
             );
-            console.log('existingArticle:',existingArticle)
-            console.log('updateArticle:',actions)
-            console.log('existingArticleId:',existingArticle.id)
             if (existingArticle){
                 state.collections.map(article => 
                     article.id === actions.id 
@@ -67,15 +64,9 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
                 )
             
             }
-            console.log(state.collections)
             return {
                 ...state,
                 collection: state.collections,
-                isFetching: false
-            };
-        case ArticlesActionTypes.COLLECTION_SUCCESS :
-            return{
-                ...state,
                 isFetching: false
             };
         case ArticlesActionTypes.EDIT_ARTICLE_FAILURE :
