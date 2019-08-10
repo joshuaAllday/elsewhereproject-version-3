@@ -35,13 +35,48 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
         case ArticlesActionTypes.EDIT_ARTICLE_START :
             return {
                 ...state,
-                isPosting: true
+                isFetching: true
             };
         case ArticlesActionTypes.EDIT_ARTICLE_SUCCESS :
             return {
                 ...state,
-                isPosting: false,
+                isFetching: true,
                 Edited: action.payload
+            };
+        case ArticlesActionTypes.COLLECTION_UPDATE :
+            let actions = action.payload;
+            let existingArticle = state.collections.find(
+                article => article.id === actions.id
+            );
+            console.log('existingArticle:',existingArticle)
+            console.log('updateArticle:',actions)
+            console.log('existingArticleId:',existingArticle.id)
+            if (existingArticle){
+                state.collections.map(article => 
+                    article.id === actions.id 
+                    ? (Object.assign(article, {
+                        firstname: actions.firstname,
+                        lastname: actions.lastname,
+                        articletitle: actions.articletitle,
+                        latitude: actions.latitude,
+                        longitude: actions.longitude,
+                        article: actions.article
+                    }))
+                    
+                    : article
+                )
+            
+            }
+            console.log(state.collections)
+            return {
+                ...state,
+                collection: state.collections,
+                isFetching: false
+            };
+        case ArticlesActionTypes.COLLECTION_SUCCESS :
+            return{
+                ...state,
+                isFetching: false
             };
         case ArticlesActionTypes.EDIT_ARTICLE_FAILURE :
         case ArticlesActionTypes.POST_ARTICLE_FAILURE :

@@ -9,7 +9,6 @@ import Modal from '../modal/modal.component';
 import ModalEditArticle from '../modal-edit-article/modal-edit-article.component';
 import ArticleCard from '../article-card/article-card.component';
 
-
 class ArticleListEdit extends React.Component {
     constructor(){
         super();
@@ -54,7 +53,7 @@ class ArticleListEdit extends React.Component {
 const mapStateToProps = createStructuredSelector({
     hidden: selectModalHidden
 });
-
+ 
 const mapDispatchToProps = dispatch => ({
     toggleModal: () => dispatch(toggleModal())
 });

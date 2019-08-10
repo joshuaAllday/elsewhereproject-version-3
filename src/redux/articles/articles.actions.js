@@ -112,10 +112,28 @@ export const editArticleStartAsync = ({id, firstname,lastname,articletitle,latit
         .then(data => {
             if(data.success === true){
                 dispatch(editArticleSuccess(data))
+                dispatch(editCollectionUpdateAsync({id, firstname,lastname,articletitle,latitude,longitude,article}))
             } else {
                 dispatch(editArticleFailure(data))
             }
         })
         .catch(error => dispatch(editArticleFailure(error.message)))
+    }
+};
+
+
+export const editCollectionUpdate = data => ({
+    type: ArticlesActionTypes.COLLECTION_UPDATE,
+    payload: data
+});
+
+export const editCollectionUpdateSuccess = () => ({
+    type: ArticlesActionTypes.COLLECTION_SUCCESS
+});
+
+export const editCollectionUpdateAsync = data => {
+    return dispatch => {
+        dispatch(editCollectionUpdate(data))
+        return dispatch(editCollectionUpdateSuccess())
     }
 };

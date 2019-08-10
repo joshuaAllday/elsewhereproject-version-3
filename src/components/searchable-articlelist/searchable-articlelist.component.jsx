@@ -39,7 +39,7 @@ class SearchableArticlelist extends React.Component {
 };
 
 const mapStateToProps = createStructuredSelector({
-    collections: selectCollections 
+    collections: selectCollections
 });
 
 

@@ -34,8 +34,8 @@ class ModalEditArticle extends React.Component{
         event.preventDefault();
         const { editArticleStartAsync } = this.props;
         const { id, firstname, lastname, articletitle, latitude, longitude, article } = this.state;
-        console.log(this.state);
         editArticleStartAsync(id, firstname, lastname, articletitle, latitude, longitude, article);
+        this.props.toggleModal();
     };
 
     render(){
