@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { toggleModal } from '../../redux/modal/modal.actions';
-import { editArticleStartAsync } from '../../redux/articles/articles.actions';
+import { editArticleStartAsync, deleteArticleStartAsync } from '../../redux/articles/articles.actions';
 
 import CustomButton from '../custom-button/custom-button.component';
 import FormInputEdit from '../form-input-edit/form-input-edit.component';
@@ -35,6 +35,13 @@ class ModalEditArticle extends React.Component{
         const { editArticleStartAsync } = this.props;
         const { id, firstname, lastname, articletitle, latitude, longitude, article } = this.state;
         editArticleStartAsync(id, firstname, lastname, articletitle, latitude, longitude, article);
+        this.props.toggleModal();
+    };
+
+    handleDelete = event => {
+        event.preventDefault();
+        const { article, num } = this.props;
+        this.props.deleteArticleStartAsync(article.id, num)
         this.props.toggleModal();
     };
 
@@ -93,11 +100,14 @@ class ModalEditArticle extends React.Component{
                                 defaultValue={article.article}
                             />
                             <div className='save-button'>
-                                <CustomButton type='submit'>
+                                <CustomButton type='submit' isArticleSaving>
                                     Save
                                 </CustomButton>
                                 <CustomButton onClick={toggleModal}>
-                                    Cancel
+                                    Exit
+                                </CustomButton>
+                                <CustomButton onClick={this.handleDelete} isArticleDeleting>
+                                    Delete
                                 </CustomButton>
                             </div>
                         </form>
@@ -111,7 +121,8 @@ class ModalEditArticle extends React.Component{
 const mapDispatchToProps = dispatch => ({
     toggleModal: () => dispatch(toggleModal()),
     editArticleStartAsync: (id, firstname, lastname, articletitle, latitude, longitude, article) => 
-    dispatch(editArticleStartAsync({id, firstname, lastname, articletitle, latitude, longitude, article}))
+    dispatch(editArticleStartAsync({id, firstname, lastname, articletitle, latitude, longitude, article})),
+    deleteArticleStartAsync: (id, num) => dispatch(deleteArticleStartAsync({id, num}))
 });
 
 export default connect(null, mapDispatchToProps)(ModalEditArticle);

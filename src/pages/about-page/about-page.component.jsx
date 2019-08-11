@@ -9,7 +9,6 @@ import aboutpicturetwo from '../../assets/About2.png';
 const AboutPage = () => (
     <div className='about-page-container'>
         <PageCard>
-            <h1> About Page </h1>
             <p className="text-container">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor sodales velit, 
                 sit amet consectetur lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 

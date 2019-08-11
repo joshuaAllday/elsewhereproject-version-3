@@ -15,12 +15,12 @@ import './App.css';
 
 const LandingPage = lazy(() => import('./pages/landing-page/landing-page.component'));
 const AboutPage = lazy(() => import('./pages/about-page/about-page.component'));
-const ArticlePage = lazy(() => import('./pages/article-page/article-page.component'));
 const PostPage = lazy(() => import('./pages/post-page/post-page.component'));
 const MapPage = lazy(() => import('./pages/map-page/map-page.component'));
 const LoginPage = lazy(() => import('./pages/login/login.component'));
 const EditPage = lazy(() => import('./pages/edit-page/edit-page.component'));
 const RegisterPage = lazy(() => import('./pages/register-page/register-page.component'));
+const ErrorPage = lazy(() => import('./pages/error-page/error-page.component'));
 
 const App = ({fetchCollectionsStartAsync, currentUser}) =>  {
 
@@ -38,7 +38,6 @@ const App = ({fetchCollectionsStartAsync, currentUser}) =>  {
             }
             <Route exact path='/' component={LandingPage} />
             <Route exact path='/about' component={AboutPage} />
-            <Route exact path='/article/:id' component={ArticlePage} />
             <Route exact path='/post' component={PostPage} />
             <Route exact path='/map' component={MapPage} />
             <Route
@@ -50,6 +49,7 @@ const App = ({fetchCollectionsStartAsync, currentUser}) =>  {
             />
             <PrivateRoute isAuth={currentUser} path='/edit-articles' component={EditPage}/>
             <PrivateRoute isAuth={currentUser} path='/register-user' component={RegisterPage}/>
+            <Route component={ErrorPage} />
           </Suspense>
         </ErrorBoundary>
       </Switch>

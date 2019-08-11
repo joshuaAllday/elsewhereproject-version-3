@@ -1,11 +1,14 @@
 import ArticlesActionTypes from './articles.types';
+import { collectionEdit, collectionDelete, collectionAdd } from './articles.utils';
 
 const INITIAL_STATE = {
     collections: null, 
     isFetching: true,
     errorMessage: undefined,
     isPosting: false,
-    Posted: null
+    Posted: null,
+    Edited:null,
+    Deleted: null
 };
 
 const articlesReducer = (state = INITIAL_STATE, action ) => {
@@ -24,13 +27,13 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
         case ArticlesActionTypes.POST_ARTICLE_START :
             return {
                 ...state,
-                isPosting: true
+                isFetching: true
             };
         case ArticlesActionTypes.POST_ARTICLE_SUCCESS :
             return {
-                ...state,
-                isPosting: false, 
-                Posted: action.payload
+                ...state, 
+                collections: collectionAdd(state.collections, action.payload),
+                isFetching: false
             };
         case ArticlesActionTypes.EDIT_ARTICLE_START :
             return {
@@ -40,35 +43,22 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
         case ArticlesActionTypes.EDIT_ARTICLE_SUCCESS :
             return {
                 ...state,
-                isFetching: true,
-                Edited: action.payload
+                isFetching: false,
+                collections: collectionEdit(state.collections, action.payload)
             };
-        case ArticlesActionTypes.COLLECTION_UPDATE :
-            let actions = action.payload;
-            let existingArticle = state.collections.find(
-                article => article.id === actions.id
-            );
-            if (existingArticle){
-                state.collections.map(article => 
-                    article.id === actions.id 
-                    ? (Object.assign(article, {
-                        firstname: actions.firstname,
-                        lastname: actions.lastname,
-                        articletitle: actions.articletitle,
-                        latitude: actions.latitude,
-                        longitude: actions.longitude,
-                        article: actions.article
-                    }))
-                    
-                    : article
-                )
-            
-            }
+        case ArticlesActionTypes.EDIT_DELETE_START :
             return {
                 ...state,
-                collection: state.collections,
-                isFetching: false
+                isPosting: true
+
             };
+        case ArticlesActionTypes.EDIT_DELETE_SUCCESS :
+            return {
+                ...state,
+                isPosting: false,
+                collections: collectionDelete(state.collections, action.payload)
+            };
+        case ArticlesActionTypes.EDIT_DELETE_FAILURE :
         case ArticlesActionTypes.EDIT_ARTICLE_FAILURE :
         case ArticlesActionTypes.POST_ARTICLE_FAILURE :
         case ArticlesActionTypes.FETCH_COLLECTIONS_FAILURE :

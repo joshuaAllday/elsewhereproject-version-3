@@ -12,6 +12,38 @@ const buttonStyles = css`
   }
 `;
 
+const saveArticleStyles = css`
+  background-color: #4285f4;
+  color: white;
+  border: #4285f4;
+
+  &:hover {
+    background-color: white;
+    color: #4285f4;
+    border: 1px solid #4285f4;
+  }
+`;
+
+const deleteArticleStyles = css`
+  background-color: rgba(255, 0, 0, 0.6);
+  color: white;
+  border: rgba(255, 0, 0, 0.6);
+
+  &:hover {
+    background-color: white;
+    color: rgba(255, 0, 0, 0.6);
+    border: 1px solid rgba(255, 0, 0, 0.6);
+  }
+`;
+
+const getButtonStyles = props => {
+  if (props.isArticleSaving) {
+    return saveArticleStyles;
+  }
+
+  return props.isArticleDeleting ? deleteArticleStyles : buttonStyles;
+};
+
 export const CustomButtonContainer = styled.button`
   min-width: 165px;
   width: auto;
@@ -26,5 +58,5 @@ export const CustomButtonContainer = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
-  ${buttonStyles}
+  ${getButtonStyles}
 `;
