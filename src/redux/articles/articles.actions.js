@@ -67,8 +67,7 @@ export const postArticleStartAsync = ({firstname,lastname,email,articletitle,lat
         .then(data => {
             console.log(data);
             if(data.success === true){
-                let id = data.id
-                dispatch(postArticleSuccess({id, firstname,lastname,articletitle,latitude,longitude,tag,article}))
+                dispatch(postArticleSuccess(data.article))
             } else {
                 dispatch(postArticleFailure(data))
             }
