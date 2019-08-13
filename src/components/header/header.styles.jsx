@@ -2,15 +2,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const HeaderContainer = styled.div`
-	height: 70px;
+	height: 80px;
   	width: 100%;
   	display: flex;
   	justify-content: flex-end;
 	margin-bottom: 25px; 
 	align-items: right;
-	@media screen and (max-width: 800px){
-		justify-content: center;
-	}
 `;
 
 export const OptionsContainer = styled.div`
@@ -33,7 +30,7 @@ export const OptionLink = styled(Link)`
 	margin-top: 10px;
 
 	&:hover{
-		opacity: 0.7;
+		opacity: 0.5;
 		color: black;
 		text-decoration: none;
 	}

@@ -7,6 +7,7 @@ import CustomButton from '../../components/custom-button/custom-button.component
 import FormInput from '../../components/form-input/form-input.component';
 import FormInputTextbox from '../../components/form-input-textbox/form-input-textbox.component';
 import PageCard from '../../components/page-card/page-card.component';
+import Header from '../../components/header/header.component';
 
 import './post-page.styles.css';
 
@@ -114,6 +115,7 @@ class PostPage extends React.Component {
         } = this.state;
         return(
             <div className='post-page-container'>
+                <Header />
                 <PageCard>
                     <p className='post-text-containers'>
                         Uploading to the map? Hell yeah! When you submit the form below,

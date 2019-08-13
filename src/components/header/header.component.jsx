@@ -10,8 +10,8 @@ import AdminDropdown from '../admin-dropdown/admin-dropdown.component';
 
 import { HeaderContainer,
     OptionsContainer, 
-    OptionLink 
-   } from './header.styles';
+    OptionLink
+} from './header.styles';
 
 const Header = ({currentUser, hidden, toggleAdminDropdown}) => (
     <HeaderContainer>

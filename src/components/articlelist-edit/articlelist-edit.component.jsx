@@ -19,7 +19,6 @@ class ArticleListEdit extends React.Component {
     }
 
     modalClick = (filteredArticle, i) => {
-        console.log(filteredArticle)
         this.setState({passArticle: filteredArticle, num: i})
         this.props.toggleModal();
     }

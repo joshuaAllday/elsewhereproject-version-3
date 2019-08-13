@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import FormInput from '../../components/form-input/form-input.component';
 import PageCard from '../../components/page-card/page-card.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
+import Header from '../../components/header/header.component';
 
 import {registerStartAsync} from '../../redux/users/users.actions';
 
@@ -55,11 +56,10 @@ class RegisterPage extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const { username, password, passwordcheck } = this.state;
+        const { username, password } = this.state;
         const{ registerStartAsync } = this.props;
         const isValid = this.validate();
         if(isValid){
-            console.log(username, password, passwordcheck);
             registerStartAsync(username, password);
             this.setState(Initial_State);
         }
@@ -69,6 +69,7 @@ class RegisterPage extends React.Component {
         const { username, usernameError, password, passwordError, passwordcheck, passwordcheckError } = this.state;
         return(
             <div className='register-page-container'>
+                <Header />
                 <PageCard>
                     <p>
                         Register an admin here! Enter a unique username and password.
