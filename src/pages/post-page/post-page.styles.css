@@ -5,3 +5,7 @@
     display: flex;
     justify-content: center;
 }
+
+.post-page-container{
+    padding: 0px 15px;
+}

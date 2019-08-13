@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PageCard from '../../components/page-card/page-card.component';
+import Header from '../../components/header/header.component';
 
 import './about-page.styles.css';
 import aboutpictureone from '../../assets/About1.png';
@@ -8,6 +9,7 @@ import aboutpicturetwo from '../../assets/About2.png';
 
 const AboutPage = () => (
     <div className='about-page-container'>
+        <Header />
         <PageCard>
             <p className="text-container">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor sodales velit, 

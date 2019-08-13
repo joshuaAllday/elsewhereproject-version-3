@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PageCard from '../../components/page-card/page-card.component';
 import FormInput from '../../components/form-input/form-input.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
+import Header from '../../components/header/header.component';
 
 import { signInStartAsync } from '../../redux/users/users.actions';
 
@@ -51,7 +52,6 @@ class LoginPage extends React.Component{
         const { username, password } = this.state;
         const isValid = this.validated();
         if (isValid){    
-            console.log(username, password);
             signInStartAsync(username, password);
             this.setState(InitialState);
         }
@@ -60,7 +60,8 @@ class LoginPage extends React.Component{
     render(){
         const { username, usernameError, password, passwordError } = this.state;
         return(
-            <div>
+            <div className='login-page-container'>
+                <Header />
                 <PageCard>
                     <form onSubmit={this.handleSubmit}>
                         <FormInput
@@ -73,7 +74,7 @@ class LoginPage extends React.Component{
                         />
                         <FormInput
                             name='password'
-                            type='text'
+                            type='password'
                             onChange={this.handleChange}
                             value={password}
                             label='Password'

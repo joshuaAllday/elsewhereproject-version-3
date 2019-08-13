@@ -37,6 +37,7 @@
 }
 
 .modal-close {
+    position: absolute;
     height: 40px;
     display: flex;
     align-items: flex-end;

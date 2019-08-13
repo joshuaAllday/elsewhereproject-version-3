@@ -19,11 +19,11 @@ export const SpinnerContainer = styled.div`
   -webkit-animation: spin 1s linear infinite;
 
   @keyframes spin {
-    0% {
-      -webkit-transform: rotate(0deg);
+    from {
+      transform: rotate(0deg);
     }
-    100% {
-      -webkit-transform: rotate(360deg);
+    from {
+      transform: rotate(360deg);
     }
   }
   @-webkit-keyframes spin {

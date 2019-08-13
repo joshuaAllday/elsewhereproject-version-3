@@ -117,7 +117,7 @@ export const editArticleStartAsync = ({id, firstname,lastname,articletitle,latit
         .then(response => response.json())
         .then(data => {
             if(data.success === true){
-                dispatch(editArticleSuccess({id, firstname,lastname,articletitle,latitude,longitude,article}));
+                dispatch(editArticleSuccess(data.article));
             } else {
                 dispatch(editArticleFailure(data))
             }

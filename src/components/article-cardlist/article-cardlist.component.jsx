@@ -20,7 +20,6 @@ class ArticleCardList extends React.Component {
         }
     }
     clickModal = (article) => {
-        console.log(article)
         this.setState({article: article});
         this.props.toggleModal();
     }

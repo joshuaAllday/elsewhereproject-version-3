@@ -11,6 +11,16 @@ const dropdownReducer = (state=INITIAL_STATE, action) => {
                 ...state,
                 hidden: !state.hidden
             };
+        case DropdownActionTypes.TOGGLE_MAP_DROPDOWN :
+            return {
+                ...state,
+                hiddenMap: !state.hiddenMap
+            }
+        case DropdownActionTypes.TOGGLE_SIGN_OUT :
+            return {
+                ...state,
+                hidden: true
+            }
         default :
             return state;
     };

@@ -1,5 +1,5 @@
 import UserActionTypes from './users.types';
-import {toggleAdminDropdown} from '../dropdown/dropdown.actions';
+import {toggleSignOut} from '../dropdown/dropdown.actions';
 
 // sign-in reducer functions
 export const signInStart = () => ({
@@ -75,7 +75,7 @@ export const signOutStartAsync = () => {
         .then(data => {
             if(data.success === 'true'){
                 dispatch(signOutSuccess());
-                dispatch(toggleAdminDropdown());
+                dispatch(toggleSignOut());
             } else {
                 dispatch(signOutFailure(data));
             }
@@ -119,7 +119,6 @@ export const registerStartAsync = ({username, password}) => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if(data.success === 'true'){
                 dispatch(registerSuccess(data))
             } else {
