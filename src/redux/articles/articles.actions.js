@@ -167,3 +167,45 @@ export const deleteArticleStartAsync = ({id, num}) => {
         .catch(error => dispatch(deleteArticleFailure(error.message)))
     }
 };
+
+
+// report article 
+
+export const reportArticleStart = () => ({
+    type: ArticlesActionTypes.REPORT_ARTICLE_START
+});
+
+export const reportArticleSuccess = data => ({
+    type: ArticlesActionTypes.REPORT_ARTICLE_SUCCESS,
+    payload: data
+});
+
+export const reportArticleFailure = errorMessage => ({
+    type: ArticlesActionTypes.REPORT_ARTICLE_FAILURE,
+    payload: errorMessage
+});
+
+export const reportArticleStartAsync = ({id, articletitle, firstname, lastname}) => {
+    return dispatch => {
+        dispatch(reportArticleStart());
+        fetch('/report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body:JSON.stringify({
+                id:id,
+                articletitle:articletitle,
+                firstname: firstname,
+                lastname: lastname
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success === true) {
+                dispatch(reportArticleSuccess(data))
+            }
+        })
+        .catch(error => dispatch(reportArticleFailure()))
+    }
+};

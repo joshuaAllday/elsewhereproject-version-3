@@ -1,3 +1,11 @@
 #map{
     height: 100vh;
 }
+
+.form-input-search{
+    width: 200px;
+    background: white;
+    opacity: 0.9;
+    border-radius: 10px;
+    color: black;
+}

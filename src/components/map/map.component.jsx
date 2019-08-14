@@ -4,18 +4,20 @@ import {createStructuredSelector} from 'reselect';
 
 import Modal from '../modal/modal.component';
 import ModalArticle from '../modal-article/modal-article.component';
+import FormInput from '../form-input/form-input.component';
 
 import { selectModalHidden } from '../../redux/modal/modal.selectors';
 import { toggleModal } from '../../redux/modal/modal.actions';
 import { selectCollections } from '../../redux/articles/articles.selectors';
 
 import './map.styles.css';
+import {styling} from './map-styling.js';
 
 class MapComponent extends React.Component {
   constructor(){
     super();
     this.state={
-      article: '',
+      article: ''
     }
   }
   componentDidMount(){
@@ -39,12 +41,70 @@ class MapComponent extends React.Component {
             restriction:{
                 latLngBounds:{north: 85, south: -85, west: -180, east:180},
                 strictBounds:false
-            }
+            },
+            styles: styling
         })
         var z1 = { minZoom: 3 };
         var z2 = { maxZoom: 12};
         map.setOptions(z1);
         map.setOptions(z2);
+        var input = document.getElementById('pac-input');
+        var searchBox = new window.google.maps.places.SearchBox(input);
+        map.controls[window.google.maps.ControlPosition.TOP_CENTER].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length === 0) {
+            return;
+          }
+
+              // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+            // For each place, get the icon, name and location.
+          var bounds = new window.google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new window.google.maps.Size(0, 0),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(17, 34),
+              scaledSize: new window.google.maps.Size(25, 25)
+            };
+
+                // Create a marker for each place.
+            markers.push(new window.google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+                  // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
         // eslint-disable-next-line
         this.props.collections.map((article) => {
             var articleid = article;
@@ -90,6 +150,15 @@ class MapComponent extends React.Component {
                   </Modal>
               }
               <div id="map"></div>
+              <form className="search-map-container">
+                <FormInput 
+                  id="pac-input" 
+                  name='search'
+                  type='search'
+                  placeholder='search'
+                  className='form-input-search'
+                />
+              </form>
             </div>
         );
     };
