@@ -187,7 +187,7 @@ class PostPage extends React.Component {
                             error={longitudeError}
                         />
 
-                        <select name='tag' type='select' value={tag} onChange={this.handleChange}>
+                        <select className='tag-container' name='tag' type='select' value={tag} onChange={this.handleChange}>
                             <option defaultValue>Article</option>
                             <option value="Business">Business</option>
                             <option value="News">News</option>

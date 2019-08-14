@@ -8,7 +8,8 @@ const INITIAL_STATE = {
     isPosting: false,
     Posted: null,
     Edited:null,
-    Deleted: null
+    Deleted: null,
+    reported: null
 };
 
 const articlesReducer = (state = INITIAL_STATE, action ) => {
@@ -58,6 +59,12 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
                 isPosting: false,
                 collections: collectionDelete(state.collections, action.payload)
             };
+        case ArticlesActionTypes.REPORT_ARTICLE_SUCCESS :
+            return {
+                ...state, 
+                reported: action.payload
+            };
+        case ArticlesActionTypes.REPORT_ARTICLE_FAILURE :
         case ArticlesActionTypes.EDIT_DELETE_FAILURE :
         case ArticlesActionTypes.EDIT_ARTICLE_FAILURE :
         case ArticlesActionTypes.POST_ARTICLE_FAILURE :

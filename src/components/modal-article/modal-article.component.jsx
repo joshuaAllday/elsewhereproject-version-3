@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { toggleModal } from '../../redux/modal/modal.actions';
+import { reportArticleStartAsync } from '../../redux/articles/articles.actions';
 
 import './modal-article.styles.css';
 
-const ModalArticle = ({article, toggleModal}) => (
+const ModalArticle = ({article, toggleModal, reportArticleStartAsync}) => (
     <div className='modal-article-container'>
         <div className='modal-article-layout'>
             <div className='modal-close' onClick={toggleModal}>
@@ -21,12 +22,17 @@ const ModalArticle = ({article, toggleModal}) => (
                     {article.article}
                 </main>
             </div>
+            <div className='report-article' onClick={() => reportArticleStartAsync(article.articletitle, article.firstname, article.lastname, article.id) }>
+                Report
+            </div>
         </div>
     </div>
 );
 
 const mapDispatchToProps = dispatch => ({
-    toggleModal: () => dispatch(toggleModal())
-  });
+    toggleModal: () => dispatch(toggleModal()),
+    reportArticleStartAsync: (articletitle, firstname, lastname, id) => 
+    dispatch(reportArticleStartAsync({articletitle, firstname, lastname, id}))
+});
 
 export default connect(null, mapDispatchToProps)(ModalArticle);

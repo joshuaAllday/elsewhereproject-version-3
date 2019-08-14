@@ -51,6 +51,11 @@
     cursor: pointer;
 }
 
+.report-article:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .article-scroll{
-    overflow-y: scroll;
+    overflow: scroll;
 }
