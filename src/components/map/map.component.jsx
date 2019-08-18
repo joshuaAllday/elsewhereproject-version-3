@@ -167,7 +167,7 @@ class MapComponent extends React.Component {
 function loadScript(){
   var index = window.document.getElementsByTagName("script")[0]
 	var script = window.document.createElement("script")
-	script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCmTWa4uGhw1vXVzvAAvkD-5rNbESORkJs&libraries=places&callback=initMap"
+	script.src = process.env.GOOGLEAPI
 	script.async = true
 	script.defer = true
 	index.parentNode.insertBefore(script,index)
