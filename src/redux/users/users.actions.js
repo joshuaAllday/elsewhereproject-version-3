@@ -19,7 +19,7 @@ export const signInFailure = error => ({
 export const signInStartAsync = ({username, password}) => {
     return dispatch => {
         dispatch(signInStart());
-        return fetch(process.env.BACKEND + '/signin', {
+        return fetch('https://elsewhereproject-backend.herokuapp.com/signin', {
             method: 'POST',
 			headers: {
 			 	'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ export const signOutStartAsync = () => {
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
         token.user = JSON.parse(token.user);
         let tokens = token.user.currentUser;
-        return fetch(process.env.BACKEND + '/signout', {
+        return fetch('https://elsewhereproject-backend.herokuapp.com/signout', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ export const registerStartAsync = ({username, password}) => {
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
         token.user = JSON.parse(token.user);
         let tokens = token.user.currentUser;
-        return fetch(process.env.BACKEND + '/register', {
+        return fetch('https://elsewhereproject-backend.herokuapp.com/register', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
