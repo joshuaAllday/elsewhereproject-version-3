@@ -83,7 +83,6 @@ class PostPage extends React.Component {
         const isValid = this.validate();
         if(isValid){
             postArticleStartAsync(firstname, lastname, email, articletitle, latitude, longitude, tag, article);
-            console.log(this.state);
             this.setState(InitialState);
         }
     };
@@ -173,7 +172,7 @@ class PostPage extends React.Component {
                             onChange={this.handleChange}
                             value={latitude}
                             label='Latitude'
-                            step=".01"
+                            step=".0001"
                             error={latitudeError}
                         />  
                         
@@ -183,7 +182,7 @@ class PostPage extends React.Component {
                             onChange={this.handleChange}
                             value={longitude}
                             label='Longitude'
-                            step=".01"
+                            step=".0001"
                             error={longitudeError}
                         />
 

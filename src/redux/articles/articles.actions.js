@@ -67,12 +67,17 @@ export const postArticleStartAsync = ({firstname,lastname,email,articletitle,lat
         .then(data => {
             console.log(data);
             if(data.success === true){
+                alert('Posted Article')
                 dispatch(postArticleSuccess(data.article))
             } else {
+                alert('Failed to post article')
                 dispatch(postArticleFailure(data))
             }
         })
-        .catch(error => dispatch(postArticleFailure(error.message)))
+        .catch(error => {
+            alert('Failed to post article')
+            dispatch(postArticleFailure(error.message))
+        })
     }
 };
 
@@ -122,7 +127,10 @@ export const editArticleStartAsync = ({id, firstname,lastname,articletitle,latit
                 dispatch(editArticleFailure(data))
             }
         })
-        .catch(error => dispatch(editArticleFailure(error.message)))
+        .catch(error => {
+            alert('Failed to edit article')
+            dispatch(editArticleFailure(error.message))
+        })
     }
 };
 
@@ -164,7 +172,10 @@ export const deleteArticleStartAsync = ({id, num}) => {
                 dispatch(deleteArticleSuccess(num))
             }
         })
-        .catch(error => dispatch(deleteArticleFailure(error.message)))
+        .catch(error => {
+            alert('failed to delete post')
+            dispatch(deleteArticleFailure(error.message))
+        })
     }
 };
 
@@ -203,9 +214,13 @@ export const reportArticleStartAsync = ({id, articletitle, firstname, lastname})
         .then(response => response.json())
         .then(data => {
             if (data.success === true) {
+                alert('Reported Article')
                 dispatch(reportArticleSuccess(data))
             }
         })
-        .catch(error => dispatch(reportArticleFailure()))
+        .catch(error => {
+            alert('Failed To Report Article')
+            dispatch(reportArticleFailure())
+        })
     }
 };
