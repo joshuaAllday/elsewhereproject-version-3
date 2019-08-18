@@ -36,10 +36,14 @@ export const signInStartAsync = ({username, password}) => {
             if (data.userId && data.success === 'true'){
                 dispatch(signInSuccess(data.token));
             } else {
+                alert('sign-in failure')
                 dispatch(signInFailure(data))
             }
         })
-        .catch(error => dispatch(signInFailure(error.message)))
+        .catch(error => {
+            alert('sign-in failure');
+            dispatch(signInFailure(error.message))
+        })
     }
 };
 
@@ -77,10 +81,14 @@ export const signOutStartAsync = () => {
                 dispatch(signOutSuccess());
                 dispatch(toggleSignOut());
             } else {
+                alert('sign-out failure')
                 dispatch(signOutFailure(data));
             }
         })
-        .catch(error => dispatch(signOutFailure(error.message)))
+        .catch(error => {
+            alert('sign-out failure')
+            dispatch(signOutFailure(error.message))
+        })
     };
 }; 
 
@@ -120,12 +128,17 @@ export const registerStartAsync = ({username, password}) => {
         .then(response => response.json())
         .then(data => {
             if(data.success === 'true'){
+                alert('successfully registered')
                 dispatch(registerSuccess(data))
             } else {
+                alert('unsuccessfully registered')
                 dispatch(registerFailure(data))
             }
         })
-        .catch(error => dispatch(registerFailure(error.message)))
+        .catch(error => {
+            alert('unsuccessfully registered')
+            dispatch(registerFailure(error.message))
+        })
     }
 
 };

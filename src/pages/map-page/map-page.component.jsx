@@ -12,6 +12,11 @@ import './map-page.styles.css';
 
 const MapPage = ({hiddenMap,toggleMapDropdown}) => (
     <div className='map-page-container'>
+        {
+            hiddenMap
+            ? <MapDropdown />
+            : null
+        }
         <MapComponentContainer />
         <div className='map-button-container' onClick={toggleMapDropdown}>
             <i className="fas fa-th"></i>
