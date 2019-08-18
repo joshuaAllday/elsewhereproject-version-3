@@ -19,7 +19,7 @@ export const fetchCollectionsFailure = errorMessage => ({
 export const fetchCollectionsStartAsync = () => {
     return dispatch => {
         dispatch(fetchCollectionsStart());
-        return fetch(process.env.BACKEND + "/articles")
+        return fetch("https://elsewhereproject-backend.herokuapp.com/articles")
         .then(response => response.json())
         .then(data => {
             dispatch(fetchCollectionsSuccess(data));
