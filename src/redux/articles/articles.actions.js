@@ -19,7 +19,7 @@ export const fetchCollectionsFailure = errorMessage => ({
 export const fetchCollectionsStartAsync = () => {
     return dispatch => {
         dispatch(fetchCollectionsStart());
-        return fetch("https://elsewhereproject-backend.herokuapp.com/articles")
+        return fetch("/articles")
         .then(response => response.json())
         .then(data => {
             dispatch(fetchCollectionsSuccess(data));
@@ -47,7 +47,7 @@ export const postArticleFailure = errorMessage => ({
 export const postArticleStartAsync = ({firstname,lastname,email,articletitle,latitude,longitude,tag,article}) => {
     return dispatch => {
         dispatch(postArticleStart());
-        return fetch('https://elsewhereproject-backend.herokuapp.com/post', {
+        return fetch('/post', {
             method: 'Post',
             headers:{
                 'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ export const editArticleStartAsync = ({id, firstname,lastname,articletitle,latit
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
         token.user = JSON.parse(token.user);
         let tokens = token.user.currentUser;
-        return fetch('https://elsewhereproject-backend.herokuapp.com/editarticle', {
+        return fetch('/editarticle', {
             method: 'PUT',
             headers:{
                 'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ export const deleteArticleStartAsync = ({id, num}) => {
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
         token.user = JSON.parse(token.user);
         let tokens = token.user.currentUser;
-        return fetch('https://elsewhereproject-backend.herokuapp.com/delete', {
+        return fetch('/delete', {
             method: 'DELETE',
             headers:{
                 'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ export const reportArticleFailure = errorMessage => ({
 export const reportArticleStartAsync = ({id, articletitle, firstname, lastname}) => {
     return dispatch => {
         dispatch(reportArticleStart());
-        fetch('https://elsewhereproject-backend.herokuapp.com/report', {
+        fetch('/report', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
