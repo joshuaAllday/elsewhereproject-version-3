@@ -17,15 +17,10 @@ const MapPage = ({hiddenMap,toggleMapDropdown}) => (
             ? <MapDropdown />
             : null
         }
-        <MapComponentContainer />
         <div className='map-button-container' onClick={toggleMapDropdown}>
             <i className="fas fa-th"></i>
         </div>
-        {
-            hiddenMap
-            ? <MapDropdown />
-            : null
-        }
+        <MapComponentContainer />
     </div>
 );
 

@@ -1,0 +1,2 @@
+export const REACT_APP_GOOGLEAPI = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCmTWa4uGhw1vXVzvAAvkD-5rNbESORkJs&libraries=places&callback=initMap`;
+export const REACT_APP_BACKENDURL = `http://localhost:3000`;

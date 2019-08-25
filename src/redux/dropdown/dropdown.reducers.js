@@ -1,7 +1,9 @@
 import DropdownActionTypes from './dropdown.types';
 
 const INITIAL_STATE ={
-    hidden: true
+    hidden: true, 
+    hiddenMap: false,
+    hiddenNav: true
 };
 
 const dropdownReducer = (state=INITIAL_STATE, action) => {
@@ -20,6 +22,11 @@ const dropdownReducer = (state=INITIAL_STATE, action) => {
             return {
                 ...state,
                 hidden: true
+            }
+        case DropdownActionTypes.TOGGLE_NAVIGATION :
+            return {
+                ...state,
+                hiddenNav: !state.hiddenNav
             }
         default :
             return state;

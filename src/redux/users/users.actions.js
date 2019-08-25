@@ -1,6 +1,6 @@
 import UserActionTypes from './users.types';
 import {toggleSignOut} from '../dropdown/dropdown.actions';
-
+import { REACT_APP_BACKENDURL } from '../../config';
 // sign-in reducer functions
 export const signInStart = () => ({
     type:UserActionTypes.SIGN_IN_START
@@ -19,7 +19,7 @@ export const signInFailure = error => ({
 export const signInStartAsync = ({username, password}) => {
     return dispatch => {
         dispatch(signInStart());
-        return fetch('/signin', {
+        return fetch(`${REACT_APP_BACKENDURL}/signin`, {
             method: 'POST',
 			headers: {
 			 	'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ export const signOutStartAsync = () => {
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
         token.user = JSON.parse(token.user);
         let tokens = token.user.currentUser;
-        return fetch('/signout', {
+        return fetch(`${REACT_APP_BACKENDURL}/signout`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ export const registerStartAsync = ({username, password}) => {
         let token = JSON.parse(window.localStorage.getItem('persist:root'));
         token.user = JSON.parse(token.user);
         let tokens = token.user.currentUser;
-        return fetch('/register', {
+        return fetch(`${REACT_APP_BACKENDURL}/register`, {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',

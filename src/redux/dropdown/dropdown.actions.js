@@ -11,3 +11,7 @@ export const toggleMapDropdown = () => ({
 export const toggleSignOut = () => ({
     type: DropdownActionTypes.TOGGLE_SIGN_OUT
 });
+
+export const toggleNavigation = () => ({
+    type: DropdownActionTypes.TOGGLE_NAVIGATION
+});

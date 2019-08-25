@@ -11,3 +11,8 @@ export const selectMapDropdownHidden = createSelector(
 	[selectDropdown],
 	dropdown => dropdown.hiddenMap
 );
+
+export const selectNavHidden = createSelector(
+	[selectDropdown],
+	dropdown => dropdown.hiddenNav
+);

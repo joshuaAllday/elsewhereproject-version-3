@@ -4,11 +4,12 @@ import {createStructuredSelector} from 'reselect';
 
 import Modal from '../modal/modal.component';
 import ModalArticle from '../modal-article/modal-article.component';
-import FormInput from '../form-input/form-input.component';
 
 import { selectModalHidden } from '../../redux/modal/modal.selectors';
 import { toggleModal } from '../../redux/modal/modal.actions';
 import { selectCollections } from '../../redux/articles/articles.selectors';
+
+import { REACT_APP_GOOGLEAPI } from '../../config';
 
 import './map.styles.css';
 import {styling} from './map-styling.js';
@@ -150,15 +151,13 @@ class MapComponent extends React.Component {
                   </Modal>
               }
               <div id="map"></div>
-              <form className="search-map-container">
-                <FormInput 
-                  id="pac-input" 
-                  name='search'
-                  type='search'
-                  placeholder='search'
-                  className='form-input-search'
-                />
-              </form>
+              <input 
+                    id="pac-input" 
+                    name='search'
+                    type='search'
+                    placeholder='search'
+                    className='form-input-search'
+              />
             </div>
         );
     };
@@ -166,8 +165,8 @@ class MapComponent extends React.Component {
 
 function loadScript(){
   var index = window.document.getElementsByTagName("script")[0]
-	var script = window.document.createElement("script")
-	script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCmTWa4uGhw1vXVzvAAvkD-5rNbESORkJs&libraries=places&callback=initMap"
+  var script = window.document.createElement("script")
+	script.src = REACT_APP_GOOGLEAPI
 	script.async = true
 	script.defer = true
 	index.parentNode.insertBefore(script,index)

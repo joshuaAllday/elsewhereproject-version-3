@@ -1,54 +1,65 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 
 import { selectCurrentUser } from '../../redux/users/users.selectors';
-import { selectDropdownHidden } from '../../redux/dropdown/dropdown.selectors';
-import { toggleAdminDropdown } from '../../redux/dropdown/dropdown.actions';
+import { selectDropdownHidden, selectNavHidden } from '../../redux/dropdown/dropdown.selectors';
+import { toggleAdminDropdown, toggleNavigation } from '../../redux/dropdown/dropdown.actions';
 
+import CollapsedNavigation from '../collapsed-navigation/collapsed-navigation.component';
 import AdminDropdown from '../admin-dropdown/admin-dropdown.component';
 
-import { HeaderContainer,
-    OptionsContainer, 
-    OptionLink
-} from './header.styles';
+import './header.styles.css';
 
-const Header = ({currentUser, hidden, toggleAdminDropdown}) => (
-    <HeaderContainer>
-        <OptionsContainer>
-            <OptionLink to='/'>
+const Header = ({currentUser, hidden, hiddenNav, toggleAdminDropdown, toggleNavigation}) => (
+    <div  className='header-container'>
+        <div className={`options-container ${hiddenNav ? 'toggled' : 'toggle'}`}>
+            <div className='collapsed-navigation-container'>
+                <CollapsedNavigation />
+            </div>
+            <Link className='option-link' to='/'>
                 Home
-            </OptionLink>
-            <OptionLink to='/about'>
+            </Link>
+            <Link className='option-link' to='/about'>
                 About
-            </OptionLink>
-            <OptionLink to='/map'>
+            </Link>
+            <Link className='option-link' to='/map'>
                 Map
-            </OptionLink>
-            <OptionLink to='/post'>
+            </Link>
+            <Link className='option-link' to='/post'>
                 Post
-            </OptionLink>
+            </Link>
             {
                 currentUser ? (
-                    <OptionLink as='div' onClick={toggleAdminDropdown}>
+                    <Link className='option-link' as='div' onClick={toggleAdminDropdown}>
                         Admin
-                    </OptionLink>     
+                    </Link>     
                 ) : (
                     null
                 )
             }
             {hidden ? null : <AdminDropdown />}
-        </OptionsContainer>
-    </HeaderContainer>
+        </div>
+        <div className='option-toggle' onClick={toggleNavigation}>
+            <div className='burger-icon-container'>
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+        </div>
+    </div>
 );
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    hidden: selectDropdownHidden
+    hidden: selectDropdownHidden,
+    hiddenNav: selectNavHidden
 });
 
 const mapDispatchToProps = dispatch => ({
-    toggleAdminDropdown: () => dispatch(toggleAdminDropdown())
+    toggleAdminDropdown: () => dispatch(toggleAdminDropdown()),
+    toggleNavigation: () => dispatch(toggleNavigation())
 });
   
 export default connect(mapStateToProps,mapDispatchToProps)(Header);
