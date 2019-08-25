@@ -100,13 +100,13 @@ class ModalEditArticle extends React.Component{
                                 defaultValue={article.article}
                             />
                             <div className='save-button'>
-                                <CustomButton type='submit' isArticleSaving>
+                                <CustomButton className='edit-article-buttons' type='submit' isArticleSaving>
                                     Save
                                 </CustomButton>
-                                <CustomButton onClick={toggleModal}>
+                                <CustomButton className='edit-article-buttons' onClick={toggleModal}>
                                     Exit
                                 </CustomButton>
-                                <CustomButton onClick={this.handleDelete} isArticleDeleting>
+                                <CustomButton className='edit-article-buttons' onClick={this.handleDelete} isArticleDeleting>
                                     Delete
                                 </CustomButton>
                             </div>

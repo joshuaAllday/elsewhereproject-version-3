@@ -25,6 +25,13 @@
     text-align: center;
 }
 
+@media screen and (max-width: 850px) {
+    .modal-article-layout{
+        width: 75vw;
+    }
+}
+
+
 .article-main-body{
     text-align: left;
     padding: 10px 15px;

@@ -12,6 +12,11 @@
     text-align: center;
     border: 2px solid grey;
 }
+@media screen and (max-width: 850px) {
+    .article-edit-container{
+        width: 70vw;
+    }
+}
 
 .input-container{
     overflow-y: scroll;
@@ -22,6 +27,11 @@
     justify-content: center;
     margin-bottom: 15px;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.edit-article-buttons{
+    margin: 5px;
 }
 
 .modal-container{
