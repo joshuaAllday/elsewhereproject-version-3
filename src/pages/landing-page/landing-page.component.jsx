@@ -8,9 +8,9 @@ import Header from '../../components/header/header.component';
 import './landing-page.styles.css';
 
 const LandingPage = () => (
-    <div>
+    <div className='landing-page-container'>
         <Header />
-        <div className='landing-page-container'>
+        <div className='landing-page-sections-container'>
             <div className='welcome-section'>
                 <WelcomeLogo /> 
             </div>

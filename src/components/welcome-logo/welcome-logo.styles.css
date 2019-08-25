@@ -17,3 +17,12 @@
     flex-direction: column;
     align-items: center;
 }
+
+@media screen and (max-width: 700px) {
+    .logo{
+        width: 70vw;
+    }
+    .message{
+        font-size: 10px;
+    }
+}
