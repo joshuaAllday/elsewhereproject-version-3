@@ -25,6 +25,17 @@
     text-align: center;
 }
 
+.article-comments{
+    cursor: pointer;
+}
+.article-comments:hover{
+    text-decoration: underline;
+}
+
+.comment-section-container{
+    margin-top: 30px;
+}
+
 @media screen and (max-width: 850px) {
     .modal-article-layout{
         width: 75vw;

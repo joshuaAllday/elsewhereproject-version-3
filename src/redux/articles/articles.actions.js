@@ -1,5 +1,6 @@
 import  ArticlesActionTypes from './articles.types';
 import { REACT_APP_BACKENDURL } from '../../config';
+
 // fetch articles functions
 
 export const fetchCollectionsStart = () => ({
@@ -199,7 +200,7 @@ export const reportArticleFailure = errorMessage => ({
 export const reportArticleStartAsync = ({id, articletitle, firstname, lastname}) => {
     return dispatch => {
         dispatch(reportArticleStart());
-        fetch(`${REACT_APP_BACKENDURL}/report`, {
+        return fetch(`${REACT_APP_BACKENDURL}/report`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -220,7 +221,50 @@ export const reportArticleStartAsync = ({id, articletitle, firstname, lastname})
         })
         .catch(error => {
             alert('Failed To Report Article')
-            dispatch(reportArticleFailure())
+            dispatch(reportArticleFailure(error))
+        })
+    }
+};
+
+
+//  fetching comments for articles 
+
+export const fetchCommentsStart = () => ({
+    type: ArticlesActionTypes.FETCH_COMMENTS_START
+});
+
+export const fetchCommentsSuccess = comments => ({
+    type: ArticlesActionTypes.FETCH_COMMENTS_SUCCESS,
+    payload: comments
+});
+
+export const fetchCommentsFailure = errorMessage => ({
+    type: ArticlesActionTypes.FETCH_COMMENTS_FAILURE,
+    payload: errorMessage
+});
+
+export const fetchCommentsAsyncStart = ({ articlenumber }) => {
+    return dispatch => {
+        dispatch(fetchCommentsStart());
+        return fetch(`${REACT_APP_BACKENDURL}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body:JSON.stringify({
+                articlenumber: articlenumber
+            })
+        })
+        .then(response => response.json())
+        .then(comments => {
+            if (comments.success === true) {
+                dispatch(fetchCommentsSuccess(comments.comments))
+            } else {
+                dispatch(fetchCommentsFailure('Error Fetching the Comments'))
+            }
+        })
+        .catch(error => {
+            dispatch(fetchCommentsFailure('Error Fetching the Comments'))
         })
     }
 };

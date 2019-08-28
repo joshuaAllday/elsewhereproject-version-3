@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { selectCurrentUser } from '../../redux/users/users.selectors';
 import { selectDropdownHidden, selectNavHidden } from '../../redux/dropdown/dropdown.selectors';
@@ -18,23 +18,23 @@ const Header = ({currentUser, hidden, hiddenNav, toggleAdminDropdown, toggleNavi
             <div className='collapsed-navigation-container'>
                 <CollapsedNavigation />
             </div>
-            <Link className='option-link' to='/'>
+            <NavLink className='option-link' exact to='/' activeStyle={{ textDecoration: 'underline' }}>
                 Home
-            </Link>
-            <Link className='option-link' to='/about'>
+            </NavLink>
+            <NavLink className='option-link' to='/about' activeStyle={{ textDecoration: 'underline' }}>
                 About
-            </Link>
-            <Link className='option-link' to='/map'>
+            </NavLink>
+            <NavLink className='option-link' to='/map' activeStyle={{ textDecoration: 'underline' }}>
                 Map
-            </Link>
-            <Link className='option-link' to='/post'>
+            </NavLink>
+            <NavLink className='option-link' to='/post' activeStyle={{ textDecoration: 'underline' }}>
                 Post
-            </Link>
+            </NavLink>
             {
                 currentUser ? (
-                    <Link className='option-link' as='div' onClick={toggleAdminDropdown}>
+                    <div className='option-link' as='div' onClick={toggleAdminDropdown}>
                         Admin
-                    </Link>     
+                    </div>     
                 ) : (
                     null
                 )

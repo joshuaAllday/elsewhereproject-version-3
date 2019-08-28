@@ -9,7 +9,9 @@ const INITIAL_STATE = {
     Posted: null,
     Edited:null,
     Deleted: null,
-    reported: null
+    reported: null,
+    comments: [],
+    isFetchingComments: false
 };
 
 const articlesReducer = (state = INITIAL_STATE, action ) => {
@@ -64,14 +66,27 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
                 ...state, 
                 reported: action.payload
             };
+        case ArticlesActionTypes.FETCH_COMMENTS_START : 
+            return {
+                ...state,
+                isFetchingComments: true
+            }
+        case ArticlesActionTypes.FETCH_COMMENTS_SUCCESS :
+            return {
+                ...state, 
+                comments: action.payload,
+                isFetchingComments: false
+            }
         case ArticlesActionTypes.REPORT_ARTICLE_FAILURE :
         case ArticlesActionTypes.EDIT_DELETE_FAILURE :
         case ArticlesActionTypes.EDIT_ARTICLE_FAILURE :
         case ArticlesActionTypes.POST_ARTICLE_FAILURE :
         case ArticlesActionTypes.FETCH_COLLECTIONS_FAILURE :
+        case ArticlesActionTypes.FETCH_COMMENTS_FAILURE :
             return {
                 ...state,
-                isFetching: true,
+                isFetching: false,
+                isFetchingComments: false,
                 errorMessage: action.payload
             };
         default : 
