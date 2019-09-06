@@ -2,18 +2,24 @@ import React, { useState} from 'react';
 import { connect } from 'react-redux';
 
 import { toggleModal } from '../../redux/modal/modal.actions';
-import { reportArticleStartAsync, fetchCommentsAsyncStart } from '../../redux/articles/articles.actions';
+import { reportArticleStartAsync, fetchCommentsAsyncStart, resetComments } from '../../redux/articles/articles.actions';
 
 import CommentsSectionContainer from '../comments/comments.container';
 
 import './modal-article.styles.css';
 
-const ModalArticle = ({article, toggleModal, reportArticleStartAsync, fetchCommentsAsyncStart}) => {
+const ModalArticle = ({article, toggleModal, reportArticleStartAsync, fetchCommentsAsyncStart, resetComments}) => {
     const [hiddenComments, setHiddenComments] = useState(true);
     return(
         <div className='modal-article-container'>
             <div className='modal-article-layout'>
-                <div className='modal-close' onClick={toggleModal}>
+                <div 
+                    className='modal-close' 
+                    onClick={() => {
+                        toggleModal();
+                        resetComments();
+                    }}
+                >
                     &times;
                 </div>
                 <header className='article-header'>
@@ -41,7 +47,7 @@ const ModalArticle = ({article, toggleModal, reportArticleStartAsync, fetchComme
                             </div>
                         ) : (
                             <div className='comment-section-container'>
-                                <CommentsSectionContainer />
+                                <CommentsSectionContainer articlenumber={article.id} />
                             </div>
                         )
                     }
@@ -53,6 +59,7 @@ const ModalArticle = ({article, toggleModal, reportArticleStartAsync, fetchComme
 
 const mapDispatchToProps = dispatch => ({
     toggleModal: () => dispatch(toggleModal()),
+    resetComments: () => dispatch(resetComments()),
     reportArticleStartAsync: (articletitle, firstname, lastname, id) => 
     dispatch(reportArticleStartAsync({articletitle, firstname, lastname, id})),
     fetchCommentsAsyncStart: (articlenumber) => dispatch(fetchCommentsAsyncStart({articlenumber}))

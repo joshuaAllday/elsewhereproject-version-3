@@ -66,7 +66,6 @@ export const postArticleStartAsync = ({firstname,lastname,email,articletitle,lat
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if(data.success === true){
                 alert('Posted Article')
                 dispatch(postArticleSuccess(data.article))
@@ -260,7 +259,7 @@ export const fetchCommentsAsyncStart = ({ articlenumber }) => {
             if (comments.success === true) {
                 dispatch(fetchCommentsSuccess(comments.comments))
             } else {
-                dispatch(fetchCommentsFailure('Error Fetching the Comments'))
+                dispatch(fetchCommentsFailure('commenterror'))
             }
         })
         .catch(error => {
@@ -268,3 +267,47 @@ export const fetchCommentsAsyncStart = ({ articlenumber }) => {
         })
     }
 };
+
+export const postCommentStart = () => ({
+    type: ArticlesActionTypes.POST_COMMENT_START
+});
+
+export const postCommentSuccess = data => ({
+    type: ArticlesActionTypes.POST_COMMENT_SUCCESS,
+    payload: data
+});
+
+export const postCommentFailure = errorMessage => ({
+    type: ArticlesActionTypes.POST_COMMENT_FAILURE,
+    payload: errorMessage
+});
+
+export const postCommentAsyncStart = ({ id, name, comment }) => {
+    return dispatch => {
+        dispatch(postCommentStart());
+        return fetch(`${REACT_APP_BACKENDURL}/post-comment`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body:JSON.stringify({
+                articlenumber: id,
+                name: name,
+                comment: comment
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success === true) {
+                dispatch(postCommentSuccess(data.comment))
+            }
+        })
+        .catch(error => {
+            dispatch(fetchCommentsFailure('Error Posting the Comments'))
+        })
+    }
+}
+
+export const resetComments = () => ({
+    type: ArticlesActionTypes.RESET_COMMENTS
+});

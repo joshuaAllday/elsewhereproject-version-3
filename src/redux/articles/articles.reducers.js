@@ -1,5 +1,5 @@
 import ArticlesActionTypes from './articles.types';
-import { collectionEdit, collectionDelete, collectionAdd } from './articles.utils';
+import { collectionEdit, collectionDelete, collectionAdd, commentsAdd } from './articles.utils';
 
 const INITIAL_STATE = {
     collections: null, 
@@ -11,7 +11,8 @@ const INITIAL_STATE = {
     Deleted: null,
     reported: null,
     comments: [],
-    isFetchingComments: false
+    isFetchingComments: false,
+
 };
 
 const articlesReducer = (state = INITIAL_STATE, action ) => {
@@ -77,6 +78,25 @@ const articlesReducer = (state = INITIAL_STATE, action ) => {
                 comments: action.payload,
                 isFetchingComments: false
             }
+        case ArticlesActionTypes.POST_COMMENT_START :
+            return {
+                ...state,
+                isFetchingComments: true
+            }
+        case ArticlesActionTypes.POST_COMMENT_SUCCESS : 
+            return {
+                ...state,
+                comments:commentsAdd(state.comments, action.payload),
+                isFetchingComments: false,
+                errorMessage: undefined
+            }
+        case ArticlesActionTypes.RESET_COMMENTS :
+            return {
+                ...state, 
+                comments: [],
+                errorMessage: undefined
+            }
+        case ArticlesActionTypes.POST_COMMENT_FAILURE :
         case ArticlesActionTypes.REPORT_ARTICLE_FAILURE :
         case ArticlesActionTypes.EDIT_DELETE_FAILURE :
         case ArticlesActionTypes.EDIT_ARTICLE_FAILURE :

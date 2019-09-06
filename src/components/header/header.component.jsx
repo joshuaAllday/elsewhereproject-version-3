@@ -18,16 +18,16 @@ const Header = ({currentUser, hidden, hiddenNav, toggleAdminDropdown, toggleNavi
             <div className='collapsed-navigation-container'>
                 <CollapsedNavigation />
             </div>
-            <NavLink className='option-link' exact to='/' activeStyle={{ textDecoration: 'underline' }}>
+            <NavLink className='option-link' exact to='/' activeStyle={{ borderBottom: '3px solid black' }}>
                 Home
             </NavLink>
-            <NavLink className='option-link' to='/about' activeStyle={{ textDecoration: 'underline' }}>
+            <NavLink className='option-link' to='/about' activeStyle={{ borderBottom: '3px solid black' }}>
                 About
             </NavLink>
-            <NavLink className='option-link' to='/map' activeStyle={{ textDecoration: 'underline' }}>
+            <NavLink className='option-link' to='/map' activeStyle={{ borderBottom: '3px solid black' }}>
                 Map
             </NavLink>
-            <NavLink className='option-link' to='/post' activeStyle={{ textDecoration: 'underline' }}>
+            <NavLink className='option-link' to='/post' activeStyle={{ borderBottom: '3px solid black' }}>
                 Post
             </NavLink>
             {

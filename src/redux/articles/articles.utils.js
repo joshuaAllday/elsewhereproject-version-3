@@ -42,3 +42,18 @@ export const collectionAdd = (collections, article) => {
     console.log(collections);
     return collections;
 };
+
+export const commentsAdd = (comments, commentToAdd) => {
+    const commentObject = {
+        "name": commentToAdd.name,
+        "comment": commentToAdd.comment,
+        "articlenumber": commentToAdd.articlenumber
+    }
+    if ( comments.length === 0 ){
+        comments[0] = commentObject;
+    } else {
+        let length = comments.length;
+        comments[length] = commentObject;
+    }
+    return comments;
+};

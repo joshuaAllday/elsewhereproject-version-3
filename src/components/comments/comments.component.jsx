@@ -4,24 +4,31 @@ import { createStructuredSelector } from 'reselect';
 
 import { selectComments, selectCommentsError } from '../../redux/articles/articles.selectors';
 
-const CommentsSection = ({comments, error}) => (
+import CommentsPost from '../comments-post/comments-post.component';
+
+import './comments.styles.css';
+
+const CommentsSection = ({comments, error, articlenumber}) => (
     <div>
         <h5>
             Comments
         </h5>
-
         {
             error !== undefined
-            ? <div> {error} </div>
-            : ( <>
+            ? (
+                error === 'commenterror' 
+                ? <div>
+                    <CommentsPost id={articlenumber}/>
+                    <h5> No Comments </h5>
+                  </div>
+                : <div> {error} </div>
+            ): ( <>
+                <CommentsPost id={articlenumber} />
                 {comments.map((comment,i) => {
                     return(
-                        <div key={i}>
-                            <h5>
-                                {comment.name}
-                            </h5>
+                        <div key={i} className='comment-container'>
                             <p>
-                                {comment.comment}
+                                <b>{comment.name}</b>: {comment.comment}
                             </p>
                         </div>
                     )

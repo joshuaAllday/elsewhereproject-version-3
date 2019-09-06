@@ -11,23 +11,69 @@ import './collapsed-navigation.styles.css';
 
 const CollapsedNavigation = ({currentUser, toggleNavigation, signOutStartAsync}) => (
     <div className='collapsed-option-container'>
-        <NavLink className='collapsed-option-link' exact onClick={toggleNavigation} to='/'>
+        <NavLink 
+            className='collapsed-option-link' 
+            exact 
+            onClick={toggleNavigation} 
+            to='/' 
+            activeStyle={{ 
+                background:'white', opacity: '0.6' 
+            }}
+        >
             Home
         </NavLink>
-        <NavLink className='collapsed-option-link' onClick={toggleNavigation} to='/about'>
+        <NavLink 
+            className='collapsed-option-link' 
+            onClick={toggleNavigation} 
+            to='/about'
+            activeStyle={{ 
+                background:'white', opacity: '0.6' 
+            }}
+        >
             About
         </NavLink>
-        <NavLink className='collapsed-option-link' onClick={toggleNavigation} to='/map'>
+        <NavLink 
+            className='collapsed-option-link' 
+            onClick={toggleNavigation} 
+            to='/map'
+            activeStyle={{ 
+                background:'white', opacity: '0.6' 
+            }}
+        >
             Map
         </NavLink>
-        <NavLink className='collapsed-option-link' onClick={toggleNavigation} to='/post'>
+        <NavLink 
+            className='collapsed-option-link' 
+            onClick={toggleNavigation} 
+            to='/post'
+            activeStyle={{ 
+                background:'white', opacity: '0.6' 
+            }}
+        >
             Post
         </NavLink>
         {
             currentUser
             ? ( <>
-                    <NavLink to='/edit-articles' onClick={toggleNavigation} className='collapsed-option-link'> Edit Articles </NavLink>
-                    <NavLink to='/register-user' onClick={toggleNavigation} className='collapsed-option-link'> Register User </NavLink>
+                    <NavLink to='/edit-articles' 
+                        onClick={toggleNavigation} 
+                        className='collapsed-option-link'
+                        activeStyle={{ 
+                            background:'white', opacity: '0.6' 
+                        }}
+                    > 
+                        Edit Articles 
+                    </NavLink>
+                    <NavLink 
+                        to='/register-user' 
+                        onClick={toggleNavigation} 
+                        className='collapsed-option-link'
+                        activeStyle={{ 
+                            background:'white', opacity: '0.6' 
+                        }}
+                    > 
+                        Register User 
+                    </NavLink>
                     <div onClick={signOutStartAsync} className='collapsed-option-link'> Sign Out </div>
                 </>
             ) : null
